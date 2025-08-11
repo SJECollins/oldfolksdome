@@ -1,0 +1,585 @@
+[gd_scene load_steps=16 format=3 uid="uid://dqyknqb41746a"]
+
+[ext_resource type="Texture2D" uid="uid://dbest8nx20abc" path="res://assets/backgrounds/backgroundsm.png" id="1_gee14"]
+[ext_resource type="Script" uid="uid://cevj8h14kxja1" path="res://scenes/time_manager.gd" id="2_iywne"]
+[ext_resource type="Script" uid="uid://dft6jy55p3yw0" path="res://scenes/character_manager.gd" id="2_lbhrr"]
+[ext_resource type="Script" uid="uid://bnkrr6civmbfu" path="res://scenes/hud.gd" id="2_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://dxxr8i2rq828v" path="res://assets/nan_one.png" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://d0agnmfhmp4oc" path="res://scenes/game_manager.gd" id="4_p57ef"]
+[ext_resource type="Theme" uid="uid://dgpyevnjrwi43" path="res://assets/theme/play_button_theme.tres" id="6_dinhu"]
+[ext_resource type="Theme" uid="uid://dyt278622nq65" path="res://assets/theme/alt_button_theme.tres" id="7_gee14"]
+[ext_resource type="Texture2D" uid="uid://dffpxhj3vs4op" path="res://assets/play.png" id="7_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://by2g7bmllwv6d" path="res://scenes/skirmish_arena.tscn" id="7_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://butkjwvpvqw25" path="res://assets/med.png" id="8_dinhu"]
+[ext_resource type="Texture2D" uid="uid://lbsvdhwj56te" path="res://assets/fast.png" id="9_kvuet"]
+[ext_resource type="Texture2D" uid="uid://dib1p6238b31e" path="res://assets/weapons/woodenspoon.png" id="12_trtic"]
+[ext_resource type="Texture2D" uid="uid://duh48w62bbe3i" path="res://assets/weapons/cane.png" id="13_ir15t"]
+[ext_resource type="Texture2D" uid="uid://bvidk7cla2nif" path="res://assets/weapons/walker.png" id="14_ir15t"]
+
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -128.0
+offset_right = 224.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_gee14")
+stretch_mode = 2
+
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource("2_iywne")
+
+[node name="CharacterManager" type="Node" parent="."]
+script = ExtResource("2_lbhrr")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("4_p57ef")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_lnu2h")
+
+[node name="PanelTop" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+
+[node name="TopMenu" type="HBoxContainer" parent="HUD/PanelTop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="TimeControls" type="HBoxContainer" parent="HUD/PanelTop/TopMenu"]
+layout_mode = 2
+
+[node name="BtnNormSpeed" type="Button" parent="HUD/PanelTop/TopMenu/TimeControls"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+theme = ExtResource("6_dinhu")
+icon = ExtResource("7_kvpfn")
+expand_icon = true
+
+[node name="BtnMedSpeed" type="Button" parent="HUD/PanelTop/TopMenu/TimeControls"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("6_dinhu")
+icon = ExtResource("8_dinhu")
+expand_icon = true
+
+[node name="BtnFastSpeed" type="Button" parent="HUD/PanelTop/TopMenu/TimeControls"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+theme = ExtResource("6_dinhu")
+icon = ExtResource("9_kvuet")
+expand_icon = true
+
+[node name="LblCountdown" type="Label" parent="HUD/PanelTop/TopMenu"]
+layout_mode = 2
+tooltip_text = "Number of weeks remaining"
+mouse_filter = 0
+text = "52 weeks left"
+
+[node name="HBoxGranCount" type="HBoxContainer" parent="HUD/PanelTop/TopMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="GranIcon" type="TextureRect" parent="HUD/PanelTop/TopMenu/HBoxGranCount"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+tooltip_text = "Current number of recruited grannies"
+texture = ExtResource("2_yqjtg")
+expand_mode = 1
+
+[node name="LblGrannyCount" type="Label" parent="HUD/PanelTop/TopMenu/HBoxGranCount"]
+layout_mode = 2
+tooltip_text = "Current number of recruited grannies"
+mouse_filter = 0
+text = "x 1"
+
+[node name="LblMoney" type="Label" parent="HUD/PanelTop/TopMenu"]
+layout_mode = 2
+tooltip_text = "Amount of gold available"
+mouse_filter = 0
+text = "G: 1000"
+
+[node name="PanelCosts" type="Panel" parent="HUD/PanelTop/TopMenu/LblMoney"]
+layout_mode = 0
+offset_left = -40.0
+offset_top = 28.0
+offset_right = 100.0
+offset_bottom = 108.0
+
+[node name="Margins" type="MarginContainer" parent="HUD/PanelTop/TopMenu/LblMoney/PanelCosts"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+
+[node name="Column" type="VBoxContainer" parent="HUD/PanelTop/TopMenu/LblMoney/PanelCosts/Margins"]
+layout_mode = 2
+
+[node name="LblCosts" type="Label" parent="HUD/PanelTop/TopMenu/LblMoney/PanelCosts/Margins/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Weekly Costs"
+horizontal_alignment = 1
+
+[node name="LblGrannyCosts" type="Label" parent="HUD/PanelTop/TopMenu/LblMoney/PanelCosts/Margins/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Granny Costs: "
+
+[node name="LblStaffCosts" type="Label" parent="HUD/PanelTop/TopMenu/LblMoney/PanelCosts/Margins/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Granny Costs: "
+
+[node name="BtnMenu" type="Button" parent="HUD/PanelTop/TopMenu"]
+layout_mode = 2
+tooltip_text = "Open menu"
+theme = ExtResource("7_gee14")
+text = "Menu"
+
+[node name="PanelMenu" type="Panel" parent="HUD"]
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -80.0
+offset_right = 80.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="HUD/PanelMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="BtnSaveGame" type="Button" parent="HUD/PanelMenu/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Save Game"
+
+[node name="BtnMainMenu" type="Button" parent="HUD/PanelMenu/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Main Menu"
+
+[node name="BtnQuit" type="Button" parent="HUD/PanelMenu/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit
+"
+
+[node name="BtnClose" type="Button" parent="HUD/PanelMenu/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Close
+"
+
+[node name="PanelGranny" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -320.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Margins" type="MarginContainer" parent="HUD/PanelGranny"]
+layout_mode = 1
+offset_right = 160.0
+offset_bottom = 296.0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ScrollGranny" type="ScrollContainer" parent="HUD/PanelGranny/Margins"]
+layout_mode = 2
+
+[node name="GrannyList" type="VBoxContainer" parent="HUD/PanelGranny/Margins/ScrollGranny"]
+layout_mode = 2
+
+[node name="PanelShop" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -320.0
+offset_right = 160.0
+grow_vertical = 0
+
+[node name="ScrollShop" type="ScrollContainer" parent="HUD/PanelShop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/PanelShop/ScrollShop"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="ShopList" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 14
+
+[node name="StaffContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+
+[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Staff Member"
+
+[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer"]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowBtmStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cost: 200G"
+
+[node name="BtnHire" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowBtmStaff"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "Hire"
+
+[node name="RowSpoon" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon/TextureRect"]
+position = Vector2(16, 16)
+texture = ExtResource("12_trtic")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="LblSpoon" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Spoon"
+
+[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "20G"
+
+[node name="RowCane" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane/TextureRect"]
+position = Vector2(16, 4)
+texture = ExtResource("13_ir15t")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="LblCane" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cane"
+
+[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50G"
+
+[node name="RowWalker" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+theme_override_constants/separation = 26
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker/TextureRect"]
+position = Vector2(16, 4)
+texture = ExtResource("14_ir15t")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="LblWalker" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Walker"
+
+[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "100G"
+
+[node name="PanelSelectGranny" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -100.0
+offset_right = 120.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PanelSelectGranny"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LblSelect" type="Label" parent="HUD/PanelSelectGranny/VBoxContainer"]
+custom_minimum_size = Vector2(172, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Pick a granny to enter the skirmish:"
+autowrap_mode = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HUD/PanelSelectGranny/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+
+[node name="GrannyList" type="VBoxContainer" parent="HUD/PanelSelectGranny/VBoxContainer/ScrollContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="RowButtons" type="HBoxContainer" parent="HUD/PanelSelectGranny/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="BtnConfirm" type="Button" parent="HUD/PanelSelectGranny/VBoxContainer/RowButtons"]
+layout_mode = 2
+text = "Confirm"
+
+[node name="BtnSkip" type="Button" parent="HUD/PanelSelectGranny/VBoxContainer/RowButtons"]
+layout_mode = 2
+text = "Skip Skirmish"
+
+[node name="PanelSkirmish" type="Panel" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -80.0
+offset_right = 224.0
+offset_bottom = 112.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PanelSkirmish"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="HUD/PanelSkirmish/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Skirmish between:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/PanelSkirmish/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="Granny" type="VBoxContainer" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="GrannyContainer" type="SubViewportContainer" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Granny"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Granny" type="SubViewport" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Granny/GrannyContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="LblName" type="Label" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Granny"]
+layout_mode = 2
+text = "Test"
+
+[node name="LblVs" type="Label" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Vs"
+
+[node name="Opponent" type="VBoxContainer" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="OpponentContainer" type="SubViewportContainer" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Opponent"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Opponent" type="SubViewport" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Opponent/OpponentContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="LblName" type="Label" parent="HUD/PanelSkirmish/VBoxContainer/HBoxContainer/Opponent"]
+layout_mode = 2
+text = "Test"
+
+[node name="SkirmishBtns" type="HBoxContainer" parent="HUD/PanelSkirmish/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BtnAccept" type="Button" parent="HUD/PanelSkirmish/VBoxContainer/SkirmishBtns"]
+layout_mode = 2
+text = "Accept"
+
+[node name="BtnReject" type="Button" parent="HUD/PanelSkirmish/VBoxContainer/SkirmishBtns"]
+layout_mode = 2
+text = "Reject
+"
+
+[node name="BtnGrannies" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Grannies"
+
+[node name="BtnTestSkirmish" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.0
+offset_top = -31.0
+offset_right = 42.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Skirmish
+"
+
+[node name="BtnShop" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 53.0
+grow_vertical = 0
+text = "Shop
+"
+
+[node name="SkirmishArena" parent="." instance=ExtResource("7_u5sy4")]
+layout_mode = 1
+mouse_filter = 2
+
+[connection signal="pressed" from="HUD/PanelTop/TopMenu/TimeControls/BtnNormSpeed" to="HUD" method="_on_btn_norm_speed_pressed"]
+[connection signal="pressed" from="HUD/PanelTop/TopMenu/TimeControls/BtnMedSpeed" to="HUD" method="_on_btn_med_speed_pressed"]
+[connection signal="pressed" from="HUD/PanelTop/TopMenu/TimeControls/BtnFastSpeed" to="HUD" method="_on_btn_fast_speed_pressed"]
+[connection signal="mouse_entered" from="HUD/PanelTop/TopMenu/LblMoney" to="HUD" method="_on_lbl_money_mouse_entered"]
+[connection signal="mouse_exited" from="HUD/PanelTop/TopMenu/LblMoney" to="HUD" method="_on_lbl_money_mouse_exited"]
+[connection signal="pressed" from="HUD/PanelTop/TopMenu/BtnMenu" to="HUD" method="_on_btn_menu_pressed"]
+[connection signal="pressed" from="HUD/PanelMenu/Column/BtnSaveGame" to="HUD" method="_on_btn_save_game_pressed"]
+[connection signal="pressed" from="HUD/PanelMenu/Column/BtnMainMenu" to="HUD" method="_on_btn_main_menu_pressed"]
+[connection signal="pressed" from="HUD/PanelMenu/Column/BtnQuit" to="HUD" method="_on_btn_quit_pressed"]
+[connection signal="pressed" from="HUD/PanelMenu/Column/BtnClose" to="HUD" method="_on_btn_close_pressed"]
+[connection signal="pressed" from="HUD/PanelSelectGranny/VBoxContainer/RowButtons/BtnConfirm" to="HUD" method="_on_btn_confirm_pressed"]
+[connection signal="pressed" from="HUD/PanelSelectGranny/VBoxContainer/RowButtons/BtnSkip" to="HUD" method="_on_btn_skip_pressed"]
+[connection signal="pressed" from="HUD/PanelSkirmish/VBoxContainer/SkirmishBtns/BtnAccept" to="HUD" method="_on_btn_accept_pressed"]
+[connection signal="pressed" from="HUD/PanelSkirmish/VBoxContainer/SkirmishBtns/BtnReject" to="HUD" method="_on_btn_reject_pressed"]
+[connection signal="pressed" from="HUD/BtnGrannies" to="HUD" method="_on_btn_grannies_pressed"]
+[connection signal="pressed" from="HUD/BtnTestSkirmish" to="HUD" method="_on_btn_test_skirmish_pressed"]
+[connection signal="pressed" from="HUD/BtnShop" to="HUD" method="_on_btn_shop_pressed"]

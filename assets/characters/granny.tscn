@@ -1,0 +1,743 @@
+[gd_scene load_steps=42 format=3 uid="uid://dcgtpph5jrxdu"]
+
+[ext_resource type="Script" uid="uid://bbk3sgbydc2y2" path="res://assets/characters/granny.gd" id="1_rfpk7"]
+[ext_resource type="Script" uid="uid://caofyesheu7ll" path="res://assets/resources/granny_class.gd" id="2_l4b5e"]
+[ext_resource type="Texture2D" uid="uid://b1ajrgljdgr0a" path="res://assets/spritesheets/nansheet_six.png" id="3_l4b5e"]
+[ext_resource type="Theme" uid="uid://dyt278622nq65" path="res://assets/theme/alt_button_theme.tres" id="4_fyl2f"]
+
+[sub_resource type="Resource" id="Resource_fyl2f"]
+script = ExtResource("2_l4b5e")
+id = 0
+name = ""
+stamina = 1000
+health = 100
+aggression = 0
+strength = 0
+dexterity = 0
+courage = 0
+fame = 0
+fame_string = "Unknown"
+wins = 0
+losses = 0
+recruited = false
+retired = false
+dead = false
+metadata/_custom_type_script = "uid://caofyesheu7ll"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rfpk7"]
+radius = 5.0
+height = 26.0
+
+[sub_resource type="Animation" id="Animation_fyl2f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_8qjjr"]
+resource_name = "attackdown"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.766667, 1.56667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 17, 16]
+}
+
+[sub_resource type="Animation" id="Animation_5cr0o"]
+resource_name = "attackleft"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [18, 19, 18]
+}
+
+[sub_resource type="Animation" id="Animation_uj156"]
+resource_name = "attackright"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [20, 21, 20]
+}
+
+[sub_resource type="Animation" id="Animation_teif3"]
+resource_name = "attackup"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [22, 23, 22]
+}
+
+[sub_resource type="Animation" id="Animation_clfv8"]
+resource_name = "blockdown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [48]
+}
+
+[sub_resource type="Animation" id="Animation_n0nfh"]
+resource_name = "blockleft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [49]
+}
+
+[sub_resource type="Animation" id="Animation_dvckt"]
+resource_name = "blockright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [50]
+}
+
+[sub_resource type="Animation" id="Animation_so2xj"]
+resource_name = "blockup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [51]
+}
+
+[sub_resource type="Animation" id="Animation_d15c2"]
+resource_name = "collapse"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 1.33333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [64, 65, 66, 67]
+}
+
+[sub_resource type="Animation" id="Animation_qh654"]
+resource_name = "dodgedown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [52]
+}
+
+[sub_resource type="Animation" id="Animation_e2ce8"]
+resource_name = "dodgeleft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [53]
+}
+
+[sub_resource type="Animation" id="Animation_swstg"]
+resource_name = "dodgeright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [54]
+}
+
+[sub_resource type="Animation" id="Animation_ye5l0"]
+resource_name = "dodgeup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [55]
+}
+
+[sub_resource type="Animation" id="Animation_7lh51"]
+resource_name = "hitdown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [56]
+}
+
+[sub_resource type="Animation" id="Animation_cp7eh"]
+resource_name = "hitleft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [57]
+}
+
+[sub_resource type="Animation" id="Animation_m6cce"]
+resource_name = "hitright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [58]
+}
+
+[sub_resource type="Animation" id="Animation_x58tx"]
+resource_name = "hitup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [59]
+}
+
+[sub_resource type="Animation" id="Animation_l4b5e"]
+resource_name = "idledown"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_2h164"]
+resource_name = "idleleft"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_rfpk7"]
+resource_name = "idleright"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_kco1u"]
+resource_name = "idleup"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_oltwr"]
+resource_name = "rundown"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35]
+}
+
+[sub_resource type="Animation" id="Animation_7dax0"]
+resource_name = "runleft"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39]
+}
+
+[sub_resource type="Animation" id="Animation_vfsl2"]
+resource_name = "runright"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [40, 41, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_q4cim"]
+resource_name = "runup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47]
+}
+
+[sub_resource type="Animation" id="Animation_e4k2p"]
+resource_name = "stundown"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [60]
+}
+
+[sub_resource type="Animation" id="Animation_g1sjk"]
+resource_name = "stunleft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [61]
+}
+
+[sub_resource type="Animation" id="Animation_dejv0"]
+resource_name = "stunright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [62]
+}
+
+[sub_resource type="Animation" id="Animation_umm17"]
+resource_name = "stunup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GrannySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [63]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kco1u"]
+_data = {
+&"RESET": SubResource("Animation_fyl2f"),
+&"attackdown": SubResource("Animation_8qjjr"),
+&"attackleft": SubResource("Animation_5cr0o"),
+&"attackright": SubResource("Animation_uj156"),
+&"attackup": SubResource("Animation_teif3"),
+&"blockdown": SubResource("Animation_clfv8"),
+&"blockleft": SubResource("Animation_n0nfh"),
+&"blockright": SubResource("Animation_dvckt"),
+&"blockup": SubResource("Animation_so2xj"),
+&"collapse": SubResource("Animation_d15c2"),
+&"dodgedown": SubResource("Animation_qh654"),
+&"dodgeleft": SubResource("Animation_e2ce8"),
+&"dodgeright": SubResource("Animation_swstg"),
+&"dodgeup": SubResource("Animation_ye5l0"),
+&"hitdown": SubResource("Animation_7lh51"),
+&"hitleft": SubResource("Animation_cp7eh"),
+&"hitright": SubResource("Animation_m6cce"),
+&"hitup": SubResource("Animation_x58tx"),
+&"idledown": SubResource("Animation_l4b5e"),
+&"idleleft": SubResource("Animation_2h164"),
+&"idleright": SubResource("Animation_rfpk7"),
+&"idleup": SubResource("Animation_kco1u"),
+&"rundown": SubResource("Animation_oltwr"),
+&"runleft": SubResource("Animation_7dax0"),
+&"runright": SubResource("Animation_vfsl2"),
+&"runup": SubResource("Animation_q4cim"),
+&"stundown": SubResource("Animation_e4k2p"),
+&"stunleft": SubResource("Animation_g1sjk"),
+&"stunright": SubResource("Animation_dejv0"),
+&"stunup": SubResource("Animation_umm17")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fyl2f"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kco1u"]
+bg_color = Color(0.580392, 0.0666667, 0.0823529, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oltwr"]
+bg_color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dax0"]
+bg_color = Color(0.123599, 0.2759, 0.60559, 1)
+
+[node name="Granny" type="CharacterBody2D"]
+collision_layer = 255
+input_pickable = true
+script = ExtResource("1_rfpk7")
+granny_stats = SubResource("Resource_fyl2f")
+
+[node name="LblPlusOne" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -20.0
+offset_right = 48.0
+offset_bottom = 5.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "+1"
+
+[node name="GrannySprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_l4b5e")
+hframes = 16
+vframes = 5
+frame = 1
+
+[node name="GrannyShape" type="CollisionShape2D" parent="."]
+z_index = 2
+shape = SubResource("CapsuleShape2D_rfpk7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kco1u")
+}
+
+[node name="AttackRay" type="RayCast2D" parent="."]
+target_position = Vector2(0, 32)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -20.0
+offset_right = 8.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_fyl2f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kco1u")
+step = 1.0
+rounded = true
+show_percentage = false
+
+[node name="StaminaBar" type="ProgressBar" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -24.0
+offset_right = 8.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_oltwr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7dax0")
+max_value = 1000.0
+step = 10.0
+rounded = true
+show_percentage = false
+
+[node name="Stats" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -100.0
+offset_right = 90.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Margins" type="MarginContainer" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+
+[node name="Column" type="VBoxContainer" parent="Stats/Margins"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="LblName" type="Label" parent="Stats/Margins/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Granny Name"
+horizontal_alignment = 1
+
+[node name="LblFame" type="Label" parent="Stats/Margins/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Dead Famous"
+horizontal_alignment = 1
+
+[node name="RowTop" type="HBoxContainer" parent="Stats/Margins/Column"]
+layout_mode = 2
+
+[node name="LblTraining" type="Label" parent="Stats/Margins/Column/RowTop"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Training: Select one"
+
+[node name="RowMiddle" type="HBoxContainer" parent="Stats/Margins/Column"]
+layout_mode = 2
+
+[node name="BtnAggression" type="Button" parent="Stats/Margins/Column/RowMiddle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_fyl2f")
+theme_override_font_sizes/font_size = 20
+text = "A: 0"
+flat = true
+
+[node name="BtnStrength" type="Button" parent="Stats/Margins/Column/RowMiddle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_fyl2f")
+theme_override_font_sizes/font_size = 20
+text = "S: 0"
+flat = true
+
+[node name="BtnDexterity" type="Button" parent="Stats/Margins/Column/RowMiddle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_fyl2f")
+theme_override_font_sizes/font_size = 20
+text = "D: 0"
+flat = true
+
+[node name="BtnCourage" type="Button" parent="Stats/Margins/Column/RowMiddle"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("4_fyl2f")
+theme_override_font_sizes/font_size = 20
+text = "C: 0"
+flat = true
+
+[node name="RowBottom" type="HBoxContainer" parent="Stats/Margins/Column"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="LblWins" type="Label" parent="Stats/Margins/Column/RowBottom"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "W: 0"
+
+[node name="LblLosses" type="Label" parent="Stats/Margins/Column/RowBottom"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "L: 0"
+
+[node name="BtnRetire" type="Button" parent="Stats/Margins/Column"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Retire this granny. Cannot be undone."
+theme_override_font_sizes/font_size = 16
+text = "Retire"
+
+[node name="BtnHide" type="Button" parent="Stats"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("4_fyl2f")
+text = "X"
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnAggression" to="." method="_on_btn_aggression_pressed"]
+[connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnStrength" to="." method="_on_btn_strength_pressed"]
+[connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnDexterity" to="." method="_on_btn_dexterity_pressed"]
+[connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnCourage" to="." method="_on_btn_courage_pressed"]
+[connection signal="pressed" from="Stats/Margins/Column/BtnRetire" to="." method="_on_btn_retire_pressed"]
+[connection signal="pressed" from="Stats/BtnHide" to="." method="_on_btn_hide_pressed"]

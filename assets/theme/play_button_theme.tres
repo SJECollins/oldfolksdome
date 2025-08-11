@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dgpyevnjrwi43"]
+
+[ext_resource type="StyleBox" uid="uid://d0ei706lf7ny0" path="res://assets/theme/pressed_speed_buttons.tres" id="1_f3024"]
+[ext_resource type="StyleBox" uid="uid://bm0t3q8w2olqe" path="res://assets/theme/speed_buttons.tres" id="2_y8enh"]
+
+[resource]
+Button/colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+Button/styles/focus = ExtResource("1_f3024")
+Button/styles/hover = ExtResource("1_f3024")
+Button/styles/normal = ExtResource("2_y8enh")
+Button/styles/pressed = ExtResource("1_f3024")

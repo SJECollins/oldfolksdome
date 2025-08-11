@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://cdts8numuycv4"]
+
+[ext_resource type="Texture2D" uid="uid://dib1p6238b31e" path="res://assets/weapons/woodenspoon.png" id="1_qv83q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yiea2"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b31r3"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eu71b"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqqmk"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drxvc"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rux0e"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y2yy"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5sgj"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mtvh"]
+atlas = ExtResource("1_qv83q")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2mn1n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yiea2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b31r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eu71b")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqqmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drxvc")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rux0e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y2yy")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5sgj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mtvh")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="SpoonSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2mn1n")
+animation = &"down"

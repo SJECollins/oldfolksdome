@@ -1,0 +1,170 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbfydr3pihwyg"]
+
+[ext_resource type="FontFile" uid="uid://b721ia7jhdny6" path="res://assets/theme/PIXELADE.TTF" id="1_8uxxo"]
+[ext_resource type="StyleBox" uid="uid://2t6c3xddyhiy" path="res://assets/theme/pressedbtnstyle.tres" id="2_rmr83"]
+[ext_resource type="StyleBox" uid="uid://bihck4doovpp0" path="res://assets/theme/main_styleboxflat.tres" id="2_wk0pr"]
+[ext_resource type="StyleBox" uid="uid://c3myai2avtv6l" path="res://assets/theme/plainbtnstyle.tres" id="3_8uxxo"]
+[ext_resource type="Script" uid="uid://psoka7hcucq1" path="res://ui/main_menu.gd" id="5_8uxxo"]
+
+[sub_resource type="Theme" id="Theme_gl0q7"]
+Button/colors/font_color = Color(0.823529, 0.843137, 0.87451, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.494118, 0.498039, 0.513726, 1)
+Button/colors/font_hover_color = Color(0.45098, 0.498039, 0.513726, 1)
+Button/colors/font_hover_pressed_color = Color(0.494118, 0.498039, 0.513726, 1)
+Button/colors/font_pressed_color = Color(0.494118, 0.498039, 0.513726, 1)
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_8uxxo")
+Button/styles/focus = ExtResource("2_rmr83")
+Button/styles/hover = ExtResource("2_rmr83")
+Button/styles/normal = ExtResource("3_8uxxo")
+Button/styles/pressed = ExtResource("2_rmr83")
+Label/colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+Label/colors/font_outline_color = Color(0.207843, 0.207843, 0.207843, 1)
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_8uxxo")
+LineEdit/colors/caret_color = Color(0.823529, 0.843137, 0.87451, 1)
+LineEdit/colors/clear_button_color = Color(0.956863, 0.956863, 0.956863, 1)
+LineEdit/colors/clear_button_color_pressed = Color(0.956863, 0.956863, 0.956863, 1)
+LineEdit/colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+LineEdit/colors/font_outline_color = Color(0.207843, 0.207843, 0.207843, 1)
+LineEdit/colors/font_selected_color = Color(0.956863, 0.956863, 0.956863, 1)
+LineEdit/colors/selection_color = Color(0.494118, 0.498039, 0.513726, 1)
+LineEdit/font_sizes/font_size = 24
+LineEdit/fonts/font = ExtResource("1_8uxxo")
+Panel/styles/panel = ExtResource("2_wk0pr")
+TextEdit/colors/caret_background_color = Color(0.207843, 0.207843, 0.207843, 1)
+TextEdit/colors/caret_color = Color(0.823529, 0.843137, 0.87451, 1)
+TextEdit/colors/font_color = Color(0.956863, 0.956863, 0.956863, 1)
+TextEdit/colors/font_outline_color = Color(0.207843, 0.207843, 0.207843, 1)
+TextEdit/colors/search_result_color = Color(0.494118, 0.498039, 0.513726, 1)
+TextEdit/colors/selection_color = Color(0.823529, 0.843137, 0.87451, 1)
+TextEdit/font_sizes/font_size = 24
+TextEdit/fonts/font = ExtResource("1_8uxxo")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_gl0q7")
+script = ExtResource("5_8uxxo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LblTitle" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 96
+text = "Old Folk's Dome"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="MenuList" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BtnNewGame" type="Button" parent="VBoxContainer/HBoxContainer/MenuList"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "New Game"
+
+[node name="BtnLoadGame" type="Button" parent="VBoxContainer/HBoxContainer/MenuList"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load Game"
+
+[node name="BtnQuit" type="Button" parent="VBoxContainer/HBoxContainer/MenuList"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Quit
+"
+
+[node name="NewStartContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="LblNew" type="Label" parent="VBoxContainer/HBoxContainer/NewStartContainer"]
+layout_mode = 2
+text = "Start a new game?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewBtns" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/NewStartContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BtnStartNew" type="Button" parent="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns"]
+layout_mode = 2
+text = "Start"
+
+[node name="BtnCancel" type="Button" parent="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="LoadStartContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="QuitContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="LblQuit" type="Label" parent="VBoxContainer/HBoxContainer/QuitContainer"]
+layout_mode = 2
+text = "Are you sure you want to quit?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitBtns" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/QuitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="BtnQuitConfirm" type="Button" parent="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns"]
+layout_mode = 2
+text = "Quit"
+
+[node name="BtnCancelQuit" type="Button" parent="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns"]
+layout_mode = 2
+text = "Cancel"
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnNewGame" to="." method="_on_btn_new_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnLoadGame" to="." method="_on_btn_load_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnQuit" to="." method="_on_btn_quit_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns/BtnStartNew" to="." method="_on_btn_start_new_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns/BtnCancel" to="." method="_on_btn_cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns/BtnQuitConfirm" to="." method="_on_btn_quit_confirm_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns/BtnCancelQuit" to="." method="_on_btn_cancel_quit_pressed"]

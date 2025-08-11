@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://crtacncrakfoq"]
+
+[ext_resource type="Texture2D" uid="uid://bvidk7cla2nif" path="res://assets/weapons/walker.png" id="1_pdxvp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wrpa"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_244wt"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyy6p"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjta4"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pif1a"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iq8ce"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajxp8"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jq04d"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nti12"]
+atlas = ExtResource("1_pdxvp")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2k43v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wrpa")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_244wt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyy6p")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjta4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pif1a")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iq8ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajxp8")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jq04d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nti12")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="WalkerSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2k43v")
+animation = &"up"

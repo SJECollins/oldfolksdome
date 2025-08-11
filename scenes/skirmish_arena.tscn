@@ -1,0 +1,312 @@
+[gd_scene load_steps=24 format=3 uid="uid://by2g7bmllwv6d"]
+
+[ext_resource type="Script" uid="uid://dg478j7wawjrt" path="res://scenes/skirmish_arena.gd" id="1_6j7ju"]
+[ext_resource type="Texture2D" uid="uid://bref3761fb5q" path="res://assets/backgrounds/emptyskirmisharena.png" id="1_42xsy"]
+[ext_resource type="Texture2D" uid="uid://6qi04xkgwuta" path="res://assets/backgrounds/largecrowd.png" id="2_6j7ju"]
+[ext_resource type="Texture2D" uid="uid://blk5blp074lqy" path="res://assets/backgrounds/medcrowd.png" id="3_nxekb"]
+[ext_resource type="Texture2D" uid="uid://c3l0sl6nyqxua" path="res://assets/backgrounds/smallcrowd.png" id="4_dall8"]
+[ext_resource type="Texture2D" uid="uid://dfnanabixmdab" path="res://assets/backgrounds/skirmishjudges.png" id="5_pb1h7"]
+[ext_resource type="Texture2D" uid="uid://bbhneyfvckvxd" path="res://assets/backgrounds/skirmishjudgestwo.png" id="6_nakv7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7ju"]
+size = Vector2(160, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxekb"]
+size = Vector2(8, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kg5iy"]
+atlas = ExtResource("2_6j7ju")
+region = Rect2(0, 0, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71uta"]
+atlas = ExtResource("2_6j7ju")
+region = Rect2(0, 320, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfpos"]
+atlas = ExtResource("3_nxekb")
+region = Rect2(0, 0, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gkrf"]
+atlas = ExtResource("3_nxekb")
+region = Rect2(0, 320, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7e7g"]
+atlas = ExtResource("4_dall8")
+region = Rect2(0, 0, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw3wg"]
+atlas = ExtResource("4_dall8")
+region = Rect2(0, 320, 480, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3vrkw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kg5iy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71uta")
+}],
+"loop": true,
+"name": &"largecrowd",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfpos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gkrf")
+}],
+"loop": true,
+"name": &"medcrowd",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7e7g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw3wg")
+}],
+"loop": true,
+"name": &"smallcrowd",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5an3s"]
+atlas = ExtResource("5_pb1h7")
+region = Rect2(0, 0, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gp2qc"]
+atlas = ExtResource("5_pb1h7")
+region = Rect2(0, 320, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05btb"]
+atlas = ExtResource("5_pb1h7")
+region = Rect2(0, 640, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uocmf"]
+atlas = ExtResource("6_nakv7")
+region = Rect2(0, 0, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tydqu"]
+atlas = ExtResource("6_nakv7")
+region = Rect2(0, 320, 480, 320)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3upmd"]
+atlas = ExtResource("6_nakv7")
+region = Rect2(0, 640, 480, 320)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ylhsm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5an3s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gp2qc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05btb")
+}],
+"loop": true,
+"name": &"judges_one",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uocmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tydqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3upmd")
+}],
+"loop": true,
+"name": &"judges_two",
+"speed": 5.0
+}]
+
+[node name="SkirmishArena" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6j7ju")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -160.0
+offset_right = 240.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_42xsy")
+
+[node name="WallTop" type="StaticBody2D" parent="."]
+position = Vector2(320, 120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop"]
+shape = SubResource("RectangleShape2D_6j7ju")
+
+[node name="WallBottom" type="StaticBody2D" parent="."]
+position = Vector2(320, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom"]
+shape = SubResource("RectangleShape2D_6j7ju")
+
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(236, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("RectangleShape2D_nxekb")
+
+[node name="WallRight" type="StaticBody2D" parent="."]
+position = Vector2(404, 192)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+shape = SubResource("RectangleShape2D_nxekb")
+
+[node name="Crowd" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3vrkw")
+animation = &"smallcrowd"
+offset = Vector2(320, 160)
+
+[node name="Judges" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ylhsm")
+animation = &"judges_two"
+offset = Vector2(320, 160)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "30s"
+
+[node name="PanelStartFight" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -120.0
+offset_right = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="PanelStartFight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="LblNames" type="Label" parent="PanelStartFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Granny vs Granny"
+horizontal_alignment = 1
+
+[node name="LblRoundWinner" type="Label" parent="PanelStartFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Winner round 1: "
+horizontal_alignment = 1
+
+[node name="LblRound" type="Label" parent="PanelStartFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Round 1 of 3"
+horizontal_alignment = 1
+
+[node name="BtnFight" type="Button" parent="PanelStartFight/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Fight!"
+
+[node name="PanelEndFight" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -120.0
+offset_right = 140.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Column" type="VBoxContainer" parent="PanelEndFight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="LblNames" type="Label" parent="PanelEndFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Granny vs Granny"
+horizontal_alignment = 1
+
+[node name="LblWinner" type="Label" parent="PanelEndFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Winner: Granny"
+horizontal_alignment = 1
+
+[node name="LblPrize" type="Label" parent="PanelEndFight/Column"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "You earned: "
+horizontal_alignment = 1
+
+[node name="BtnEndFight" type="Button" parent="PanelEndFight/Column"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+text = "Okay"
+
+[connection signal="pressed" from="PanelStartFight/Column/BtnFight" to="." method="_on_btn_fight_pressed"]
+[connection signal="pressed" from="PanelEndFight/Column/BtnEndFight" to="." method="_on_btn_end_fight_pressed"]

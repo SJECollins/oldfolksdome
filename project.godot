@@ -1,0 +1,39 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="OldFolksDome"
+config/version="0.0.1"
+run/main_scene="uid://dg512oq3xv0q2"
+config/features=PackedStringArray("4.4", "Mobile")
+config/icon="uid://dfp7dvfmwbeha"
+
+[autoload]
+
+Global="*res://scripts/global.gd"
+SaveManager="*res://scripts/save_manager.gd"
+
+[display]
+
+window/size/viewport_width=640
+window/size/viewport_height=320
+window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
+
+[gui]
+
+theme/custom="uid://bvmtnhwiup6g1"
+theme/custom_font="uid://cxc8bt8708le3"
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"

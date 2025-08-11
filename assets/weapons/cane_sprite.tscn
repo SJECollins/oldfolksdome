@@ -1,0 +1,98 @@
+[gd_scene load_steps=12 format=3 uid="uid://dx3ldy166k784"]
+
+[ext_resource type="Texture2D" uid="uid://duh48w62bbe3i" path="res://assets/weapons/cane.png" id="1_2n4j0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5ha0"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4dri8"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ujy5y"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_byq3m"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whfsl"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ce2yr"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b1a6"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ypi8"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(0, 128, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6xn5"]
+atlas = ExtResource("1_2n4j0")
+region = Rect2(32, 128, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmv1w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5ha0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4dri8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ujy5y")
+}],
+"loop": false,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_byq3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whfsl")
+}],
+"loop": false,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ce2yr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b1a6")
+}],
+"loop": false,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ypi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y6xn5")
+}],
+"loop": false,
+"name": &"up",
+"speed": 5.0
+}]
+
+[node name="CaneSprite" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_bmv1w")
+animation = &"down"
