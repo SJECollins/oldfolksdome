@@ -5,7 +5,7 @@ var slot
 
 const MAX_GRANNIES = 6
 const COST_PER_GRANNY = 50
-const COST_PER_STAFF = 100
+const COST_PER_STAFF = 50
 const BASE_SKIRMISH_POT = 100
 
 var gold = 200

@@ -211,7 +211,7 @@ offset_top = -25.0
 offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "30s"
+text = "60s"
 
 [node name="PanelStartFight" type="Panel" parent="."]
 layout_mode = 1

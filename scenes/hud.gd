@@ -6,6 +6,8 @@ signal granny_selected(granny)
 signal skip_skirmish
 signal final_fight(granny)
 signal change_time_speed(time_speed: String)
+signal buy_item(item: String)
+signal hire_staff(staff)
 
 @onready var countdown = $PanelTop/TopMenu/LblCountdown
 @onready var granny_count = $PanelTop/TopMenu/HBoxGranCount/LblGrannyCount
@@ -224,3 +226,39 @@ func _on_btn_fast_speed_pressed() -> void:
 func _on_btn_skip_pressed() -> void:
 	select_panel.visible = false
 	emit_signal("skip_skirmish")
+
+
+func _on_btn_buy_spoon_pressed() -> void:
+	buy_item.emit("spoon")
+
+
+func _on_btn_buy_cane_pressed() -> void:
+	buy_item.emit("cane")
+
+
+func _on_btn_buy_walker_pressed() -> void:
+	buy_item.emit("walker")
+
+
+func _on_btn_hire_doctor_pressed() -> void:
+	var doctor = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer").queue_free()
+	hire_staff.emit(doctor)
+
+
+func _on_btn_hire_trainer_pressed() -> void:
+	var trainer = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer").queue_free()
+	hire_staff.emit(trainer)
+
+
+func _on_btn_hire_physio_pressed() -> void:
+	var physio = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer").queue_free()
+	hire_staff.emit(physio)
+
+
+func _on_btn_hire_wellness_pressed() -> void:
+	var wellness = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer").queue_free()
+	hire_staff.emit(wellness)

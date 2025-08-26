@@ -622,7 +622,7 @@ anchor_bottom = 1.0
 offset_left = -90.0
 offset_top = -100.0
 offset_right = 90.0
-offset_bottom = 28.0
+offset_bottom = 56.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -712,6 +712,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "L: 0"
 
+[node name="RowWeapon" type="HBoxContainer" parent="Stats/Margins/Column"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LblWeapon" type="Label" parent="Stats/Margins/Column/RowWeapon"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "No Weapon"
+
+[node name="BtnWeapon" type="Button" parent="Stats/Margins/Column/RowWeapon"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Add"
+
 [node name="BtnRetire" type="Button" parent="Stats/Margins/Column"]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -733,11 +747,70 @@ grow_vertical = 0
 theme = ExtResource("4_fyl2f")
 text = "X"
 
+[node name="WeaponList" type="Panel" parent="Stats"]
+custom_minimum_size = Vector2(140, 140)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Stats/WeaponList"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -49.5
+offset_top = -9.5
+offset_right = 49.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LblSelect" type="Label" parent="Stats/WeaponList/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Select a weapon:"
+
+[node name="BtnNone" type="Button" parent="Stats/WeaponList/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "None"
+flat = true
+
+[node name="BtnSpoon" type="Button" parent="Stats/WeaponList/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Wooden Spoon"
+flat = true
+
+[node name="BtnCane" type="Button" parent="Stats/WeaponList/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Cane"
+flat = true
+
+[node name="BtnWalker" type="Button" parent="Stats/WeaponList/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Walker"
+flat = true
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnAggression" to="." method="_on_btn_aggression_pressed"]
 [connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnStrength" to="." method="_on_btn_strength_pressed"]
 [connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnDexterity" to="." method="_on_btn_dexterity_pressed"]
 [connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnCourage" to="." method="_on_btn_courage_pressed"]
+[connection signal="pressed" from="Stats/Margins/Column/RowWeapon/BtnWeapon" to="." method="_on_btn_weapon_pressed"]
 [connection signal="pressed" from="Stats/Margins/Column/BtnRetire" to="." method="_on_btn_retire_pressed"]
 [connection signal="pressed" from="Stats/BtnHide" to="." method="_on_btn_hide_pressed"]

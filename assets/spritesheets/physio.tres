@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://codddtsd7ahda"]
+
+[ext_resource type="Texture2D" uid="uid://de0b32ytqfymy" path="res://assets/spritesheets/physio.png" id="1_e8nxv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r326e"]
+atlas = ExtResource("1_e8nxv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyb0g"]
+atlas = ExtResource("1_e8nxv")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r326e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wyb0g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

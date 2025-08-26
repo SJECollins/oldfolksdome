@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dqyknqb41746a"]
+[gd_scene load_steps=17 format=3 uid="uid://dqyknqb41746a"]
 
 [ext_resource type="Texture2D" uid="uid://dbest8nx20abc" path="res://assets/backgrounds/backgroundsm.png" id="1_gee14"]
 [ext_resource type="Script" uid="uid://cevj8h14kxja1" path="res://scenes/time_manager.gd" id="2_iywne"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://by2g7bmllwv6d" path="res://scenes/skirmish_arena.tscn" id="7_u5sy4"]
 [ext_resource type="Texture2D" uid="uid://butkjwvpvqw25" path="res://assets/med.png" id="8_dinhu"]
 [ext_resource type="Texture2D" uid="uid://lbsvdhwj56te" path="res://assets/fast.png" id="9_kvuet"]
+[ext_resource type="PackedScene" uid="uid://i3lkj75j1i07" path="res://assets/characters/staff.tscn" id="12_ca42v"]
 [ext_resource type="Texture2D" uid="uid://dib1p6238b31e" path="res://assets/weapons/woodenspoon.png" id="12_trtic"]
 [ext_resource type="Texture2D" uid="uid://duh48w62bbe3i" path="res://assets/weapons/cane.png" id="13_ir15t"]
 [ext_resource type="Texture2D" uid="uid://bvidk7cla2nif" path="res://assets/weapons/walker.png" id="14_ir15t"]
@@ -278,37 +279,162 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 14
 
-[node name="StaffContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+[node name="DoctorContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
+tooltip_text = "Hire for 200G (plus 50G weekly) "
 
-[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer"]
+[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff"]
 layout_mode = 2
 
-[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer"]
 handle_input_locally = false
 size = Vector2i(32, 32)
 render_target_update_mode = 4
 
-[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowTopStaff"]
+[node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
+offset = Vector2(16, 16)
+
+[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Staff Member"
+text = "Doctor"
 
-[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer"]
+[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer"]
 layout_mode = 2
 theme_override_constants/separation = 34
 alignment = 1
 
-[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowBtmStaff"]
+[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowBtmStaff"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Cost: 200G"
 
-[node name="BtnHire" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/StaffContainer/RowBtmStaff"]
+[node name="BtnHireDoctor" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowBtmStaff"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "Hire"
+
+[node name="TrainerContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+tooltip_text = "Hire for 250G (plus 50G weekly) "
+
+[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
+offset = Vector2(16, 16)
+staff_type = "trainer"
+
+[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Trainer"
+
+[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer"]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowBtmStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cost: 250G"
+
+[node name="BtnHireTrainer" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowBtmStaff"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "Hire"
+
+[node name="PhysioContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+tooltip_text = "Hire for 300G (plus 50G weekly) "
+
+[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
+offset = Vector2(16, 16)
+
+[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Physio"
+
+[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer"]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowBtmStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cost: 300G"
+
+[node name="BtnHirePhysio" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowBtmStaff"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
+text = "Hire"
+
+[node name="WellnessContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
+layout_mode = 2
+tooltip_text = "Hire for 400G (plus 50G weekly) "
+
+[node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(32, 32)
+render_target_update_mode = 4
+
+[node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
+offset = Vector2(16, 16)
+
+[node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Wellness Coach"
+
+[node name="RowBtmStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer"]
+layout_mode = 2
+theme_override_constants/separation = 34
+alignment = 1
+
+[node name="LblFee" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowBtmStaff"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Cost: 400G"
+
+[node name="BtnHireWellness" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowBtmStaff"]
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 20
@@ -316,7 +442,7 @@ text = "Hire"
 
 [node name="RowSpoon" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
@@ -333,14 +459,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Spoon"
 
-[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
+[node name="BtnBuySpoon" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "20G"
+text = "Buy: 20G"
 
 [node name="RowCane" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-theme_override_constants/separation = 34
+theme_override_constants/separation = 24
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
@@ -357,14 +483,14 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "Cane"
 
-[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
+[node name="BtnBuyCane" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "50G"
+text = "Buy: 50G"
 
 [node name="RowWalker" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-theme_override_constants/separation = 26
+theme_override_constants/separation = 9
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
@@ -379,12 +505,12 @@ region_rect = Rect2(0, 0, 32, 32)
 [node name="LblWalker" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Walker"
+text = "  Walker"
 
-[node name="BtnBuy" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
+[node name="BtnBuyWalker" type="Button" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "100G"
+text = "Buy: 100G"
 
 [node name="PanelSelectGranny" type="Panel" parent="HUD"]
 layout_mode = 1
@@ -576,6 +702,13 @@ mouse_filter = 2
 [connection signal="pressed" from="HUD/PanelMenu/Column/BtnMainMenu" to="HUD" method="_on_btn_main_menu_pressed"]
 [connection signal="pressed" from="HUD/PanelMenu/Column/BtnQuit" to="HUD" method="_on_btn_quit_pressed"]
 [connection signal="pressed" from="HUD/PanelMenu/Column/BtnClose" to="HUD" method="_on_btn_close_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer/RowBtmStaff/BtnHireDoctor" to="HUD" method="_on_btn_hire_doctor_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer/RowBtmStaff/BtnHireTrainer" to="HUD" method="_on_btn_hire_trainer_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowBtmStaff/BtnHirePhysio" to="HUD" method="_on_btn_hire_physio_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowBtmStaff/BtnHireWellness" to="HUD" method="_on_btn_hire_wellness_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowSpoon/BtnBuySpoon" to="HUD" method="_on_btn_buy_spoon_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowCane/BtnBuyCane" to="HUD" method="_on_btn_buy_cane_pressed"]
+[connection signal="pressed" from="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/RowWalker/BtnBuyWalker" to="HUD" method="_on_btn_buy_walker_pressed"]
 [connection signal="pressed" from="HUD/PanelSelectGranny/VBoxContainer/RowButtons/BtnConfirm" to="HUD" method="_on_btn_confirm_pressed"]
 [connection signal="pressed" from="HUD/PanelSelectGranny/VBoxContainer/RowButtons/BtnSkip" to="HUD" method="_on_btn_skip_pressed"]
 [connection signal="pressed" from="HUD/PanelSkirmish/VBoxContainer/SkirmishBtns/BtnAccept" to="HUD" method="_on_btn_accept_pressed"]

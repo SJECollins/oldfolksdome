@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://i3lkj75j1i07"]
+
+[ext_resource type="SpriteFrames" uid="uid://dgp0mrlw4cmvn" path="res://assets/spritesheets/wellness.tres" id="1_mjiub"]
+[ext_resource type="Script" uid="uid://s3mgg7aslct" path="res://assets/characters/staff.gd" id="2_2blje"]
+
+[node name="staff" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_mjiub")
+script = ExtResource("2_2blje")

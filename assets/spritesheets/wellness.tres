@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://dgp0mrlw4cmvn"]
+
+[ext_resource type="Texture2D" uid="uid://ftwunk728njr" path="res://assets/spritesheets/wellness.png" id="1_ye05u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ctgl1"]
+atlas = ExtResource("1_ye05u")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_saqsn"]
+atlas = ExtResource("1_ye05u")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ctgl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_saqsn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

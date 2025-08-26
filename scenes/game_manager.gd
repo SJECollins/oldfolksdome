@@ -17,6 +17,8 @@ func _ready() -> void:
 	hud.granny_selected.connect(_start_a_skirmish)
 	hud.skip_skirmish.connect(_skip_skirmish)
 	hud.change_time_speed.connect(_change_speed)
+	hud.buy_item.connect(_buy_item)
+	hud.hire_staff.connect(_hire_staff)
 	arena.end_skirmish.connect(_end_skirmish)
 	arena.visible = false
 	await get_tree().create_timer(2.0).timeout
@@ -59,6 +61,10 @@ func _deduct_expenses() -> void:
 	var staff_cost = Global.staff.size() * Global.COST_PER_STAFF
 	Global.gold -= staff_cost
 	_update_hud_gold()
+	if Global.gold <= 0:
+		time_manager.pause_time()
+		await get_tree().create_timer(2.0).timeout
+		get_tree().change_scene_to_file("res://scenes/outro.tscn")
 
 
 func _update_hud_time() -> void:
@@ -104,3 +110,19 @@ func _end_skirmish(granny) -> void:
 
 func _final_fight() -> void:
 	pass
+
+func _buy_item(item: String) -> void:
+	if item == "spoon" and Global.gold >= 20:
+		Global.weapons.append("spoon")
+		Global.gold -= 20
+	if item == "cane" and Global.gold >= 50:
+		Global.weapons.append("cane")
+		Global.gold -= 50
+	if item == "walker" and Global.gold >= 50:
+		Global.weapons.append("walker")
+		Global.gold -= 100
+
+func _hire_staff(staff_member) -> void:
+	Global.staff.append(staff_member)
+	staff_member.set_new_position()
+	Global.gold -= staff_member.cost

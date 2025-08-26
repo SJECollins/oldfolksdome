@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctvvanxpemv8g"]
+
+[ext_resource type="Script" uid="uid://dby805y4yihi4" path="res://scenes/outro_bad.gd" id="1_1xqmi"]
+
+[node name="Outro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1xqmi")
+
+[node name="BackgroundColour" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="OutroContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(480, 280)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -140.0
+offset_right = 270.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="LblLineOne" type="Label" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Oh no..."
+
+[node name="LblLineTwo" type="Label" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "What happened?.."
+autowrap_mode = 3
+
+[node name="LblLineThree" type="Label" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(540, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "You didn't budget properly and now there's no more money..."
+autowrap_mode = 3
+
+[node name="LblLineFour" type="Label" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "None of you're granny's will get the chance to save themselves in the:"
+
+[node name="LblFive" type="Label" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "OLD FOLK'S DOME"
+horizontal_alignment = 1
+
+[node name="BtnEnd" type="Button" parent="OutroContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "The end..."
+flat = true
+
+[connection signal="pressed" from="OutroContainer/BtnEnd" to="." method="_on_btn_continue_pressed"]
