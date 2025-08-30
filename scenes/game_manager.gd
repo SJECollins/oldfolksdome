@@ -133,9 +133,12 @@ func _buy_item(item: String) -> void:
 	if item == "walker" and Global.gold >= 50:
 		Global.weapons.append("walker")
 		Global.gold -= 100
+	_update_hud_gold()
+	print("Bought: " + item)
 
 
 func _hire_staff(staff_member) -> void:
+	character_manager.add_child(staff_member)
 	Global.staff.append(staff_member)
 	staff_member.hired = true
 	staff_member.set_new_position()

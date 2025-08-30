@@ -21,6 +21,7 @@ var round_active := false
 var round_num := 1
 var round_winner := []
 var winner
+var knockout: bool = false
 
 func _ready():
 	music.stop()
@@ -31,16 +32,21 @@ func _ready():
 	timer.one_shot = false
 	timer.timeout.connect(_on_Timer_timeout)
 
+func position_fighters():
+	fighter_1.position = Vector2(268, 192)
+	fighter_1.facing_dir = Vector2.RIGHT
+	fighter_2.position = Vector2(372, 192)
+	fighter_2.facing_dir = Vector2.LEFT
+
 func start_skirmish(f1: CharacterBody2D, f2: CharacterBody2D):
 	music.play()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	fighter_1 = f1
 	fighter_2 = f2
 	add_child(fighter_1)
-	fighter_1.position = Vector2(268, 192)
 	add_child(fighter_2)
-	fighter_2.position = Vector2(372, 192)
 	set_sprites()
+	position_fighters()
 	start_panel.visible = true
 	start_panel.get_node("Column/LblNames").text = fighter_1.granny_stats.name + " vs " + fighter_2.granny_stats.name
 	start_panel.get_node("Column/LblRound").text = "Round " + str(round_num) + " of 3"
@@ -79,6 +85,14 @@ func _on_Timer_timeout():
 		timer.stop()
 		return
 	round_time_game -= 1
+	
+	if fighter_1.is_out or fighter_2.is_out:
+		print("Knockout")
+		knockout = true
+		await get_tree().create_timer(4.0).timeout
+		_end_fight()
+		timer.stop()
+		
 	if round_time_game <= 0:
 		round_time_game = 0
 		round_active = false
@@ -90,6 +104,7 @@ func update_timer_label():
 	timer_label.text = str(round_time_game) + "s"
 
 func round_up():
+	print("Round end")
 	round_active = false
 	fighter_1.opponent = null
 	fighter_2.opponent = null
@@ -99,8 +114,10 @@ func round_up():
 		round_winner.append(fighter_2.granny_stats.name)
 	round_num += 1
 	if round_num < 4:
+		print("Continue")
 		fighter_1.recover("rest")
 		fighter_2.recover("rest")
+		position_fighters()
 		_continue_fight()
 	else:
 		fighter_1.recover("end")
@@ -113,18 +130,29 @@ func _continue_fight() -> void:
 	start_panel.get_node("Column/LblRoundWinner").text = "Winner Round " + str(round_num - 1) + " " + round_winner[round_num - 2]
 
 func _end_fight() -> void:
+	print("Fight over")
 	var num = round_winner.count(fighter_1.granny_stats.name)
 	var prize
-	if num == 2:
-		winner = fighter_1.granny_stats.name
-		fighter_1.granny_stats.wins += 1
-		fighter_2.granny_stats.losses += 1
-		prize = 200
+	if knockout:
+		if fighter_1.is_out:
+			winner = fighter_2.granny_stats.name
+			fighter_2.granny_stats.wins += 1
+			fighter_1.granny_stats.losses += 1
+		else:
+			winner = fighter_1.granny_stats.name
+			fighter_1.granny_stats.wins += 1
+			fighter_2.granny_stats.losses += 1
+			prize = 400 # adjust this
 	else:
-		winner = fighter_2.granny_stats.name
-		fighter_2.granny_stats.wins += 1
-		fighter_1.granny_stats.losses += 1
-		prize = 50
+		if num == 2:
+			winner = fighter_1.granny_stats.name
+			fighter_1.granny_stats.wins += 1
+			fighter_2.granny_stats.losses += 1
+			prize = 200
+		else:
+			winner = fighter_2.granny_stats.name
+			fighter_2.granny_stats.wins += 1
+			fighter_1.granny_stats.losses += 1
 	end_panel.visible = true
 	end_panel.get_node("Column/LblNames").text = fighter_1.granny_stats.name + " vs " + fighter_2.granny_stats.name
 	end_panel.get_node("Column/LblWinner").text = "Winner: " + winner

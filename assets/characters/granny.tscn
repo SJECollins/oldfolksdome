@@ -576,6 +576,8 @@ libraries = {
 [node name="AttackRay" type="RayCast2D" parent="."]
 target_position = Vector2(0, 32)
 
+[node name="WeaponNode" type="Node2D" parent="."]
+
 [node name="HealthBar" type="ProgressBar" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
@@ -614,6 +616,7 @@ rounded = true
 show_percentage = false
 
 [node name="Stats" type="Panel" parent="."]
+z_index = 5
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -804,8 +807,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Walker"
 flat = true
-
-[node name="WeaponNode" type="Node2D" parent="."]
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

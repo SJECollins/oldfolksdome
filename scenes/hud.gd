@@ -262,8 +262,9 @@ func _on_btn_buy_walker_pressed() -> void:
 func _on_btn_hire_doctor_pressed() -> void:
 	if Global.gold >= 200:
 		var doctor = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer").queue_free()
+		doctor.get_parent().remove_child(doctor)
 		hire_staff.emit(doctor)
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer").queue_free()
 	else:
 		show_warning()
 
@@ -271,8 +272,9 @@ func _on_btn_hire_doctor_pressed() -> void:
 func _on_btn_hire_trainer_pressed() -> void:
 	if Global.gold >= 250:
 		var trainer = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer").queue_free()
+		trainer.get_parent().remove_child(trainer)
 		hire_staff.emit(trainer)
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer").queue_free()
 	else:
 		show_warning()
 
@@ -280,8 +282,9 @@ func _on_btn_hire_trainer_pressed() -> void:
 func _on_btn_hire_physio_pressed() -> void:
 	if Global.gold >= 300:
 		var physio = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer").queue_free()
+		physio.get_parent().remove_child(physio)
 		hire_staff.emit(physio)
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer").queue_free()
 	else:
 		show_warning()
 
@@ -289,7 +292,8 @@ func _on_btn_hire_physio_pressed() -> void:
 func _on_btn_hire_wellness_pressed() -> void:
 	if Global.gold >= 400:
 		var wellness = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer").queue_free()
+		wellness.get_parent().remove_child(wellness)
 		hire_staff.emit(wellness)
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer").queue_free()
 	else:
 		show_warning()

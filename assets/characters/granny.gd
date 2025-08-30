@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var staminabar = $StaminaBar
 @onready var plus_one = $LblPlusOne
 @onready var stats = $Stats
+@onready var weapon_label = $Stats/Margins/Column/RowWeapon/LblWeapon
 @onready var weapon_list = $Stats/WeaponList
 @onready var weapon_node = $WeaponNode
 
@@ -45,6 +46,10 @@ var is_resting: bool = false
 var rest_timer: float = 0.0
 var last_action: String = ""
 
+# Add more nuance to runaway behaviour
+var last_runaway_direction: Vector2 = Vector2.ZERO
+var direction_change_timer: float = 0.0
+
 var facing_dir: Vector2 = Vector2.DOWN
 var opponent: CharacterBody2D = null
 
@@ -67,7 +72,7 @@ func _ready():
 
 func add_weapon(weapon_name, sprite) -> void:
 	weapon = weapon_name
-	weapon_sprite = sprite
+	weapon_sprite = sprite.instantiate()
 	weapon_node.add_child(weapon_sprite)
 	if weapon_name == "spoon":
 		granny_stats.strength += 10
@@ -75,6 +80,7 @@ func add_weapon(weapon_name, sprite) -> void:
 		granny_stats.strength += 15
 	elif weapon_name == "walker":
 		granny_stats.strength += 20
+	weapon_label.text = weapon_name.capitalize()
 
 func _on_input_event(_viewport, event, _shape_idx) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -121,7 +127,7 @@ func update_training() -> void:
 				granny_stats.strength += 1
 				plus_one.text = "+2"
 	elif currently_training == "courage":
-		granny_stats.courage += 1  
+		granny_stats.courage += 1
 	else:
 		return
 	_run_plus_one()
@@ -201,7 +207,7 @@ func _recover_stamina(delta: float) -> void:
 		recovery_rate *= 3.0  # Triple recovery when actively resting
 	
 	granny_stats.stamina = clamp(granny_stats.stamina + recovery_rate * delta, 0, MAX_STAMINA)
-	print(granny_stats.stamina)
+	print("Stamina: %d", granny_stats.stamina)
 	_update_stamina()
 
 func _decide_behavior(delta: float) -> void:
@@ -211,16 +217,22 @@ func _decide_behavior(delta: float) -> void:
 	
 	var dist = global_position.distance_to(opponent.global_position)
 	
-	# Check if granny should run away
-	if granny_stats.health < RUNAWAY_HEALTH_THRESHOLD and granny_stats.courage < RUNAWAY_COURAGE_THRESHOLD:
-		_run_away_behavior(delta)
-		return
-	
-	# If stamina is 0 HAS to rest - suck it up and die if you must
+	# Priority number 1 should be resting if stamina is 0
 	if granny_stats.stamina == 0:
 		_start_resting()
+		return
 	
-	# Check if granny should rest (only if not in immediate danger)
+	# Then check if granny should run away
+	if granny_stats.health < RUNAWAY_HEALTH_THRESHOLD and granny_stats.courage < RUNAWAY_COURAGE_THRESHOLD:
+		if granny_stats.stamina > STAMINA_RUN_DEPLETION * 2:  # Only run if has enough stamina
+			_run_away_behavior(delta)
+			return
+		else:
+			# Want to run away but no stamina - has to rest
+			_start_resting()
+			return
+	
+	# Check if granny should rest (only if not in immediate danger - probably unlikely to get far enough)
 	if dist > ATTACK_RANGE * 2 and granny_stats.stamina < REST_STAMINA_THRESHOLD and randf() < REST_CHANCE:
 		_start_resting()
 		return
@@ -284,21 +296,33 @@ func _hit_wall() -> bool:
 
 
 func _run_away_behavior(delta: float) -> void:
-	# Add randomness to the runaway direction
-	var away_dir = (global_position - opponent.global_position).normalized()
+	# Update direction change timer
+	direction_change_timer -= delta
 	
-	# Add random angle offset
-	var random_angle = randf_range(-deg_to_rad(RUNAWAY_RANDOMNESS/2), deg_to_rad(RUNAWAY_RANDOMNESS/2))
-	away_dir = away_dir.rotated(random_angle)
-	if _hit_wall():
-		var turn_dir = [-1, 1].pick_random()
-		away_dir = away_dir.rotated(turn_dir * PI/2)
+	var away_dir: Vector2
+	
+	# Only change direction if timer expired or no previous direction set
+	if direction_change_timer <= 0 or last_runaway_direction == Vector2.ZERO:
+		away_dir = (global_position - opponent.global_position).normalized()
+		
+		# Add random angle offset
+		var random_angle = randf_range(-deg_to_rad(RUNAWAY_RANDOMNESS/2), deg_to_rad(RUNAWAY_RANDOMNESS/2))
+		away_dir = away_dir.rotated(random_angle)
+		
+		# Check for wall collision and adjust
+		if _hit_wall():
+			var turn_dir = [-1, 1].pick_random()
+			away_dir = away_dir.rotated(turn_dir * PI/2)
+		
+		last_runaway_direction = away_dir
+		direction_change_timer = 0.5  # Don't change direction for 0.5 seconds
+	else:
+		# Use the last direction to avoid jittering
+		away_dir = last_runaway_direction
 	
 	velocity = away_dir * RUN_SPEED
-	
 	granny_stats.stamina = max(granny_stats.stamina - STAMINA_RUN_DEPLETION * delta, 0)
 	_update_stamina()
-	
 	_play_animation("run" + _direction_suffix(away_dir))
 
 
@@ -504,13 +528,14 @@ func _on_btn_none_pressed() -> void:
 		_clear_old_weapon(weapon)
 	weapon = ""
 	weapon_list.visible = false
+	weapon_label.text = "No weapon"
 
 
 func _on_btn_spoon_pressed() -> void:
 	if weapon:
 		_clear_old_weapon(weapon)
 	Global.weapons.erase("spoon")
-	var spoon = load("res://assets/weapons/spoon_sprite.tscn").instantiate()
+	var spoon = load("res://assets/weapons/spoon_sprite.tscn")
 	add_weapon("spoon", spoon)
 	weapon_list.visible = false
 
@@ -519,7 +544,7 @@ func _on_btn_cane_pressed() -> void:
 	if weapon:
 		_clear_old_weapon(weapon)
 	Global.weapons.erase("cane")
-	var cane = load("res://assets/weapons/cane_sprite.tscn").instantiate()
+	var cane = load("res://assets/weapons/cane_sprite.tscn")
 	add_weapon("cane", cane)
 	weapon_list.visible = false
 

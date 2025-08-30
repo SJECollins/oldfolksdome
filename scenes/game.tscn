@@ -282,7 +282,7 @@ theme_override_constants/separation = 14
 
 [node name="DoctorContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-tooltip_text = "Hire for 200G (plus 50G weekly) "
+tooltip_text = "Hire for 200G (plus 50G weekly). Helps heal between fights."
 
 [node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/DoctorContainer"]
 layout_mode = 2
@@ -322,7 +322,7 @@ text = "Hire"
 
 [node name="TrainerContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-tooltip_text = "Hire for 250G (plus 50G weekly) "
+tooltip_text = "Hire for 250G (plus 50G weekly). Helps train strength."
 
 [node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/TrainerContainer"]
 layout_mode = 2
@@ -363,7 +363,7 @@ text = "Hire"
 
 [node name="PhysioContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-tooltip_text = "Hire for 300G (plus 50G weekly) "
+tooltip_text = "Hire for 300G (plus 50G weekly). Helps train dexterity."
 
 [node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer"]
 layout_mode = 2
@@ -379,6 +379,7 @@ render_target_update_mode = 4
 
 [node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
 offset = Vector2(16, 16)
+staff_type = "physio"
 
 [node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff"]
 layout_mode = 2
@@ -403,7 +404,7 @@ text = "Hire"
 
 [node name="WellnessContainer" type="VBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList"]
 layout_mode = 2
-tooltip_text = "Hire for 400G (plus 50G weekly) "
+tooltip_text = "Hire for 400G (plus 50G weekly). Helps train aggression."
 
 [node name="RowTopStaff" type="HBoxContainer" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer"]
 layout_mode = 2
@@ -419,6 +420,7 @@ render_target_update_mode = 4
 
 [node name="staff" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport" instance=ExtResource("12_ca42v")]
 offset = Vector2(16, 16)
+staff_type = "wellness"
 
 [node name="LblStaff" type="Label" parent="HUD/PanelShop/ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff"]
 layout_mode = 2
@@ -514,6 +516,7 @@ theme_override_font_sizes/font_size = 20
 text = "Buy: 100G"
 
 [node name="PanelSelectGranny" type="Panel" parent="HUD"]
+z_index = 7
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
