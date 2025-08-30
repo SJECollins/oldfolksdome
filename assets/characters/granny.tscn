@@ -805,6 +805,8 @@ theme_override_font_sizes/font_size = 16
 text = "Walker"
 flat = true
 
+[node name="WeaponNode" type="Node2D" parent="."]
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="Stats/Margins/Column/RowMiddle/BtnAggression" to="." method="_on_btn_aggression_pressed"]
@@ -814,3 +816,7 @@ flat = true
 [connection signal="pressed" from="Stats/Margins/Column/RowWeapon/BtnWeapon" to="." method="_on_btn_weapon_pressed"]
 [connection signal="pressed" from="Stats/Margins/Column/BtnRetire" to="." method="_on_btn_retire_pressed"]
 [connection signal="pressed" from="Stats/BtnHide" to="." method="_on_btn_hide_pressed"]
+[connection signal="pressed" from="Stats/WeaponList/VBoxContainer/BtnNone" to="." method="_on_btn_none_pressed"]
+[connection signal="pressed" from="Stats/WeaponList/VBoxContainer/BtnSpoon" to="." method="_on_btn_spoon_pressed"]
+[connection signal="pressed" from="Stats/WeaponList/VBoxContainer/BtnCane" to="." method="_on_btn_cane_pressed"]
+[connection signal="pressed" from="Stats/WeaponList/VBoxContainer/BtnWalker" to="." method="_on_btn_walker_pressed"]

@@ -4,7 +4,7 @@ signal granny_recruited(granny: CharacterBody2D)
 signal granny_skirmish
 signal granny_selected(granny)
 signal skip_skirmish
-signal final_fight(granny)
+signal final_granny_selected(granny)
 signal change_time_speed(time_speed: String)
 signal buy_item(item: String)
 signal hire_staff(staff)
@@ -19,10 +19,10 @@ signal hire_staff(staff)
 @onready var money_panel = $PanelTop/TopMenu/LblMoney/PanelCosts
 @onready var skirmish_popup = $PanelSkirmish
 @onready var select_panel = $PanelSelectGranny
+@onready var warning_panel = $PanelWarning	
 
-var fighter_1
-var fighter_2
 var selected_granny
+var final: bool = false
 
 func _ready() -> void:
 	granny_panel.visible = false
@@ -31,6 +31,13 @@ func _ready() -> void:
 	menu_panel.visible = false
 	money_panel.visible = false
 	select_panel.visible = false
+	warning_panel.visible = false
+
+
+func show_warning():
+	warning_panel.visible = true
+	await get_tree().create_timer(2.0).timeout
+	warning_panel.visible = false
 
 
 func set_granny(granny) -> void:
@@ -45,7 +52,6 @@ func display_skirmish_select() -> void:
 		for child in list.get_children():
 			child.queue_free()
 	for gran in Global.recruited_grannies:
-		print(gran)
 		var btn_granny = Button.new()
 		btn_granny.flat = true
 		btn_granny.text = gran.granny_stats.name
@@ -57,12 +63,16 @@ func _on_btn_confirm_pressed() -> void:
 	if not selected_granny:
 		return
 	selected_granny.get_parent().remove_child(selected_granny)
-	granny_selected.emit(selected_granny)
+	if final:
+		final_granny_selected.emit(selected_granny)
+	else:
+		granny_selected.emit(selected_granny)
 	select_panel.visible = false
 
 
-func end_fight() -> void:
-	select_panel.get_node("VBoxContainer/LblSelect").text = "Select a granny for the final fight"
+func display_final_select() -> void:
+	final = true
+	select_panel.get_node("VBoxContainer/LblSelect").text = "Select your champion for the final fight"
 	var skip_button = select_panel.get_node("BtnSkip")
 	select_panel.remove_child(skip_button)
 	display_skirmish_select()
@@ -203,7 +213,7 @@ func _on_btn_main_menu_pressed() -> void:
 
 func _on_lbl_money_mouse_entered() -> void:
 	money_panel.get_node("Margins/Column/LblGrannyCosts").text = "Granny Costs: 50G x " + str(Global.recruited_grannies.size()) 
-	money_panel.get_node("Margins/Column/LblStaffCosts").text = "Staff Costs: 100G x " + str(Global.staff.size())
+	money_panel.get_node("Margins/Column/LblStaffCosts").text = "Staff Costs: 50G x " + str(Global.staff.size())
 	money_panel.visible = true
 
 
@@ -229,36 +239,57 @@ func _on_btn_skip_pressed() -> void:
 
 
 func _on_btn_buy_spoon_pressed() -> void:
-	buy_item.emit("spoon")
+	if Global.gold >= 20:
+		buy_item.emit("spoon")
+	else:
+		show_warning()
 
 
 func _on_btn_buy_cane_pressed() -> void:
-	buy_item.emit("cane")
+	if Global.gold >= 50:
+		buy_item.emit("cane")
+	else:
+		show_warning()
 
 
 func _on_btn_buy_walker_pressed() -> void:
-	buy_item.emit("walker")
+	if Global.gold >= 100:
+		buy_item.emit("walker")
+	else:
+		show_warning()
 
 
 func _on_btn_hire_doctor_pressed() -> void:
-	var doctor = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer").queue_free()
-	hire_staff.emit(doctor)
+	if Global.gold >= 200:
+		var doctor = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/DoctorContainer").queue_free()
+		hire_staff.emit(doctor)
+	else:
+		show_warning()
 
 
 func _on_btn_hire_trainer_pressed() -> void:
-	var trainer = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer").queue_free()
-	hire_staff.emit(trainer)
+	if Global.gold >= 250:
+		var trainer = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/TrainerContainer").queue_free()
+		hire_staff.emit(trainer)
+	else:
+		show_warning()
 
 
 func _on_btn_hire_physio_pressed() -> void:
-	var physio = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer").queue_free()
-	hire_staff.emit(physio)
+	if Global.gold >= 300:
+		var physio = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/PhysioContainer").queue_free()
+		hire_staff.emit(physio)
+	else:
+		show_warning()
 
 
 func _on_btn_hire_wellness_pressed() -> void:
-	var wellness = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
-	shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer").queue_free()
-	hire_staff.emit(wellness)
+	if Global.gold >= 400:
+		var wellness = shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer/RowTopStaff/SubViewportContainer/SubViewport/staff")
+		shop_panel.get_node("ScrollShop/MarginContainer/ShopList/WellnessContainer").queue_free()
+		hire_staff.emit(wellness)
+	else:
+		show_warning()

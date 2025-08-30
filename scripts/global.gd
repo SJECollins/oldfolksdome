@@ -15,3 +15,6 @@ var all_grannies := []
 var recruited_grannies := []
 var retired_grannies := []
 var staff := []
+
+var final_granny
+var winner

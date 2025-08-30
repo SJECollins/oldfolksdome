@@ -62,7 +62,7 @@ autowrap_mode = 3
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "The most lucrative - and most deadly - is"
+text = "The most lucrative - and most deadly - is the"
 
 [node name="LblFive" type="Label" parent="IntroContainer"]
 modulate = Color(1, 1, 1, 0)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cbfydr3pihwyg"]
+[gd_scene load_steps=8 format=3 uid="uid://cbfydr3pihwyg"]
 
 [ext_resource type="FontFile" uid="uid://b721ia7jhdny6" path="res://assets/theme/PIXELADE.TTF" id="1_8uxxo"]
 [ext_resource type="StyleBox" uid="uid://2t6c3xddyhiy" path="res://assets/theme/pressedbtnstyle.tres" id="2_rmr83"]
 [ext_resource type="StyleBox" uid="uid://bihck4doovpp0" path="res://assets/theme/main_styleboxflat.tres" id="2_wk0pr"]
 [ext_resource type="StyleBox" uid="uid://c3myai2avtv6l" path="res://assets/theme/plainbtnstyle.tres" id="3_8uxxo"]
 [ext_resource type="Script" uid="uid://psoka7hcucq1" path="res://ui/main_menu.gd" id="5_8uxxo"]
+[ext_resource type="AudioStream" uid="uid://cy47nqhmvrgso" path="res://assets/audio/bg_music.ogg" id="6_ei257"]
 
 [sub_resource type="Theme" id="Theme_gl0q7"]
 Button/colors/font_color = Color(0.823529, 0.843137, 0.87451, 1)
@@ -135,6 +136,10 @@ size_flags_horizontal = 3
 theme_override_constants/separation = 32
 alignment = 1
 
+[node name="BtnDeleteAll" type="Button" parent="VBoxContainer/HBoxContainer/LoadStartContainer"]
+layout_mode = 2
+text = "Delete All Saves"
+
 [node name="QuitContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -161,10 +166,17 @@ text = "Quit"
 layout_mode = 2
 text = "Cancel"
 
+[node name="BGMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ei257")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnNewGame" to="." method="_on_btn_new_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnLoadGame" to="." method="_on_btn_load_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/MenuList/BtnQuit" to="." method="_on_btn_quit_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns/BtnStartNew" to="." method="_on_btn_start_new_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/NewStartContainer/NewBtns/BtnCancel" to="." method="_on_btn_cancel_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/LoadStartContainer/BtnDeleteAll" to="." method="_on_btn_delete_all_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns/BtnQuitConfirm" to="." method="_on_btn_quit_confirm_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/QuitContainer/QuitBtns/BtnCancelQuit" to="." method="_on_btn_cancel_quit_pressed"]

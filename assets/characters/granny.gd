@@ -10,16 +10,17 @@ extends CharacterBody2D
 @onready var plus_one = $LblPlusOne
 @onready var stats = $Stats
 @onready var weapon_list = $Stats/WeaponList
+@onready var weapon_node = $WeaponNode
 
 const ATTACK_RANGE := 32
 const STAMINA_RECOVERY_RATE := 50.0
-const MAX_STAMINA := 1000
+const MAX_STAMINA := 1000 
 const STAMINA_RUN_DEPLETION := 1
 const STAMINA_ATTACK_COST := 15
 const STAMINA_DODGE_COST := 15
 const STAMINA_BLOCK_COST := 10
 
-const RUN_SPEED := 10.0 # Was 60.0
+const RUN_SPEED := 10.0 # Higher with dexterity????
 
 const STUN_HEALTH_THRESHOLD := 30
 const STUN_CHANCE := 0.15
@@ -52,6 +53,7 @@ var plus_one_pos := Vector2(8.0, -20.0)
 var show_plus_one := false
 
 var weapon
+var weapon_sprite
 
 func _ready():
 	attack_ray.enabled = true
@@ -63,11 +65,10 @@ func _ready():
 	weapon_list.visible = false
 	_update_stats_display()
 
-func add_weapon(new_weapon, weapon_name) -> void:
-	if weapon.get_parent():
-		weapon.get_parent().remove_child(weapon)
-	weapon = new_weapon
-	add_child(weapon)
+func add_weapon(weapon_name, sprite) -> void:
+	weapon = weapon_name
+	weapon_sprite = sprite
+	weapon_node.add_child(weapon_sprite)
 	if weapon_name == "spoon":
 		granny_stats.strength += 10
 	elif weapon_name == "cane":
@@ -135,7 +136,6 @@ func _physics_process(delta: float) -> void:
 	if is_out:
 		return
 	
-	#print("_physics_process called, stamina: ", granny_stats.stamina)
 	if show_plus_one and plus_one.visible:
 		plus_one.position.y -= 20 * delta 
 		if plus_one.position.y < -32.0:
@@ -216,7 +216,7 @@ func _decide_behavior(delta: float) -> void:
 		_run_away_behavior(delta)
 		return
 	
-	# If stamina is 0 HAS to rest
+	# If stamina is 0 HAS to rest - suck it up and die if you must
 	if granny_stats.stamina == 0:
 		_start_resting()
 	
@@ -405,11 +405,11 @@ func _play_animation(anim_name: String) -> void:
 
 func _handle_weapon(anim_name: String) -> void:
 	if anim_name.begins_with("attack"):
-		weapon.play(_direction_suffix(facing_dir))
+		weapon_sprite.play(_direction_suffix(facing_dir))
 	else:
-		weapon.animation = _direction_suffix(facing_dir)
-		weapon.pause()
-		weapon.frame = 0
+		weapon_sprite.animation = _direction_suffix(facing_dir)
+		weapon_sprite.pause()
+		weapon_sprite.frame = 0
 
 
 func _direction_suffix(dir: Vector2) -> String:
@@ -429,11 +429,12 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func recover(type: String) -> void:
 	if type == "rest":
+		granny_stats.health += 20
+		granny_stats.stamina = MAX_STAMINA
+	elif type == "post fight":
 		granny_stats.health += 10
 		granny_stats.stamina = MAX_STAMINA
-	elif type == "end":
-		granny_stats.health = 100
-		granny_stats.stamina = MAX_STAMINA
+	_update_health()
 
 
 func _on_btn_aggression_pressed() -> void:
@@ -476,4 +477,57 @@ func _on_btn_weapon_pressed() -> void:
 		weapon_list.get_node("VBoxContainer/BtnWalker").disabled = true
 	else:
 		weapon_list.get_node("VBoxContainer/BtnWalker").disabled = false
-	
+
+
+func _remove_weapon() -> void:
+	if weapon_node.get_child_count() > 0:
+		var current_weapon = weapon_node.get_child(0)
+		if current_weapon:
+			weapon_node.remove_child(current_weapon)
+			current_weapon.queue_free()
+
+
+func _clear_old_weapon(weap_name) -> void:
+	match weap_name:
+		"spoon":
+			granny_stats.strength -= 10
+		"cane":
+			granny_stats.strength -= 15
+		"walker":
+			granny_stats.strength -= 20
+	Global.weapons.append(weap_name)
+	_remove_weapon()
+
+
+func _on_btn_none_pressed() -> void:
+	if weapon:
+		_clear_old_weapon(weapon)
+	weapon = ""
+	weapon_list.visible = false
+
+
+func _on_btn_spoon_pressed() -> void:
+	if weapon:
+		_clear_old_weapon(weapon)
+	Global.weapons.erase("spoon")
+	var spoon = load("res://assets/weapons/spoon_sprite.tscn").instantiate()
+	add_weapon("spoon", spoon)
+	weapon_list.visible = false
+
+
+func _on_btn_cane_pressed() -> void:
+	if weapon:
+		_clear_old_weapon(weapon)
+	Global.weapons.erase("cane")
+	var cane = load("res://assets/weapons/cane_sprite.tscn").instantiate()
+	add_weapon("cane", cane)
+	weapon_list.visible = false
+
+
+func _on_btn_walker_pressed() -> void:
+	if weapon:
+		_clear_old_weapon(weapon)
+	Global.weapons.erase("walker")
+	var walker = load("res://assets/weapons/walker_sprite.tscn")
+	add_weapon("walker", walker)
+	weapon_list.visible = false

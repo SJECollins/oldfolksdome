@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://by2g7bmllwv6d"]
+[gd_scene load_steps=25 format=3 uid="uid://by2g7bmllwv6d"]
 
 [ext_resource type="Script" uid="uid://dg478j7wawjrt" path="res://scenes/skirmish_arena.gd" id="1_6j7ju"]
 [ext_resource type="Texture2D" uid="uid://bref3761fb5q" path="res://assets/backgrounds/emptyskirmisharena.png" id="1_42xsy"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c3l0sl6nyqxua" path="res://assets/backgrounds/smallcrowd.png" id="4_dall8"]
 [ext_resource type="Texture2D" uid="uid://dfnanabixmdab" path="res://assets/backgrounds/skirmishjudges.png" id="5_pb1h7"]
 [ext_resource type="Texture2D" uid="uid://bbhneyfvckvxd" path="res://assets/backgrounds/skirmishjudgestwo.png" id="6_nakv7"]
+[ext_resource type="AudioStream" uid="uid://cd5nqhglglidh" path="res://assets/audio/fight_music.ogg" id="8_nxekb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7ju"]
 size = Vector2(160, 8)
@@ -307,6 +308,12 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
 text = "Okay"
+
+[node name="BGMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_nxekb")
+volume_db = -20.248
+autoplay = true
+parameters/looping = true
 
 [connection signal="pressed" from="PanelStartFight/Column/BtnFight" to="." method="_on_btn_fight_pressed"]
 [connection signal="pressed" from="PanelEndFight/Column/BtnEndFight" to="." method="_on_btn_end_fight_pressed"]

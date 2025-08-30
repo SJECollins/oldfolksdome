@@ -14,34 +14,38 @@ func get_next_available_slot() -> int:
 	return slot
 
 func save_game(slot: int):
-	var game_manager = get_node("/root/Game/CharacterManager")
+	var game_manager = get_node("/root/Game/GameManager")
+	var character_manager = get_node("/root/Game/CharacterManager")
 	var time_manager = get_node("/root/Game/TimeManager")
 	
 	var save_data: SaveData = SAVE_DATA_RESOURCE.new()
 	save_data.gold = Global.gold
 	save_data.weeks_remaining = time_manager.weeks_remaining
 	save_data.num_grannies = Global.recruited_grannies.size()
-	save_data.granny_data = game_manager.export_granny_data()
+	save_data.granny_data = character_manager.export_granny_data()
+	save_data.staff_data = game_manager.export_staff_data()
 	
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
-	ResourceSaver.save(save_data, get_save_path(slot))
-	print("Game saved in slot %d" % slot)
+	var err = ResourceSaver.save(save_data, get_save_path(slot))
+	if err != OK:
+		push_error("Failed to save slot %d, error code: %d" % [slot, err])
 
 func load_game(slot: int):
-	var game_manager = get_node("/root/Game/CharacterManager")
+	var game_manager = get_node("/root/Game/GameManager")
+	var character_manager = get_node("/root/Game/CharacterManager")
 	var time_manager = get_node("/root/Game/TimeManager")
 	var path = get_save_path(slot)
 	
-	if not ResourceLoader.exists(path):
-		print("No save file found in slot %d." % slot)
+	if not FileAccess.file_exists(path):
+		push_warning("No save file found in slot %d." % slot)
 		return
 	
 	var loaded_data = ResourceLoader.load(path)
 	if loaded_data:
 		Global.gold = loaded_data.gold
 		time_manager.weeks_remaining = loaded_data.weeks_remaining
-		game_manager.load_granny_data(loaded_data.granny_data)
-		print("Game loaded from slot %d." % slot)
+		character_manager.load_granny_data(loaded_data.granny_data)
+		game_manager.load_staff_data(loaded_data.staff_data)
 
 func get_save_slots() -> Array:
 	var slots := []
@@ -65,7 +69,7 @@ func get_save_info(slot: int) -> Dictionary:
 	var path = get_save_path(slot)
 	var info = {}
 	
-	if not ResourceLoader.exists(path):
+	if not FileAccess.file_exists(path):
 		return info
 	
 	var save_data = ResourceLoader.load(path)
@@ -81,10 +85,30 @@ func get_save_info(slot: int) -> Dictionary:
 func get_all_save_info() -> Array:
 	var save_info = []
 	var slots = get_save_slots()
-	
 	for slot in slots:
 		var info = get_save_info(slot)
 		if not info.is_empty():
 			save_info.append(info)
-	
 	return save_info
+
+
+func delete_save(slot: int) -> bool:
+	var path = get_save_path(slot)
+
+	var dir = DirAccess.open("user://")
+	if dir == null:
+		push_error("Failed to open user directory.")
+		return false
+
+	if dir.remove(path) != OK:
+		push_error("Failed to delete save file: %s" % path)
+		return false
+
+	print("Save file deleted successfully: %s" % path)
+	return true
+
+
+func delete_all_saves():
+	var slots = get_save_slots()
+	for slot in slots:
+		delete_save(slot)

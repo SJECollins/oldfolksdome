@@ -28,11 +28,13 @@ func _ready():
 	timer.wait_time = 1.0
 	timer.one_shot = false
 	timer.timeout.connect(_on_Timer_timeout)
+	start_skirmish()
 
-func start_skirmish(f1: CharacterBody2D, f2: CharacterBody2D):
+func start_skirmish():
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	fighter_1 = f1
-	fighter_2 = f2
+	var final_opponent = Global.all_grannies[0] # Select the strongest granny??
+	fighter_1 = Global.final_granny
+	fighter_2 = final_opponent
 	add_child(fighter_1)
 	fighter_1.position = Vector2(268, 192)
 	add_child(fighter_2)
@@ -40,7 +42,7 @@ func start_skirmish(f1: CharacterBody2D, f2: CharacterBody2D):
 	set_sprites()
 	start_panel.visible = true
 	start_panel.get_node("Column/LblNames").text = fighter_1.granny_stats.name + " vs " + fighter_2.granny_stats.name
-	start_panel.get_node("Column/LblRound").text = "Round " + str(round_num) + " of 10"
+	start_panel.get_node("Column/LblRound").text = "Round " + str(round_num) + " of 5"
 	start_panel.get_node("Column/LblRoundWinner").visible = false
 
 func set_sprites():
@@ -49,12 +51,7 @@ func set_sprites():
 		judges.animation = "judges_one"
 	else:
 		judges.animation = "judges_two"
-	if fighter_1.granny_stats.fame > 50 or fighter_2.granny_stats.fame > 50:
-		crowd.animation = "largecrowd"
-	elif fighter_1.granny_stats.fame > 30 or fighter_2.granny_stats.fame > 30:
-		crowd.animation = "medcrowd"
-	else:
-		crowd.animation = "smallcrowd"
+	crowd.animation = "default"
 	judges.pause()
 	judges.frame = 0
 	crowd.pause()
@@ -95,7 +92,7 @@ func round_up():
 	else:
 		round_winner.append(fighter_2.granny_stats.name)
 	round_num += 1
-	if round_num < 4:
+	if round_num < 6:
 		fighter_1.recover("rest")
 		fighter_2.recover("rest")
 		_continue_fight()
@@ -125,7 +122,6 @@ func _end_fight() -> void:
 	end_panel.visible = true
 	end_panel.get_node("Column/LblNames").text = fighter_1.granny_stats.name + " vs " + fighter_2.granny_stats.name
 	end_panel.get_node("Column/LblWinner").text = "Winner: " + winner
-	end_panel.get_node("Column/LblPrize").text = "You earned: " + str(prize)
 	Global.gold += prize
 
 func _end_game() -> void:
@@ -134,7 +130,7 @@ func _end_game() -> void:
 		fighter_1.get_parent().remove_child(fighter_1)
 	if fighter_2.get_parent():
 		fighter_2.get_parent().remove_child(fighter_2)
-	end_game.emit(fighter_1)
+	Global.winner = winner
 
 func _on_btn_fight_pressed() -> void:
 	start_round()

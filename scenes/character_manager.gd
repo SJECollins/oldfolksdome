@@ -124,7 +124,9 @@ func calculate_fame(wins, losses) -> int:
 func replace_granny(granny) -> void:
 	for position in granny_positions:
 		if position["occupied-by"] == granny or position["occupied-by"] == null:
+			position["occupied-by"] = granny
 			granny.position = Vector2(position["pos"][0], position["pos"][1])
+			granny.facing_dir = Vector2.LEFT
 			add_child(granny)
 			break
 
@@ -138,6 +140,7 @@ func recruit_granny(granny) -> void:
 			granny.granny_stats.recruited = true
 			granny.facing_dir = Vector2.LEFT
 			break
+
 
 func export_granny_data() -> Array:
 	var granny_data = []
@@ -161,9 +164,9 @@ func export_granny_data() -> Array:
 		granny_data.append(granny_dict)
 	return granny_data
 
+
 func load_granny_data(granny_array: Array) -> void:
 	for granny in granny_array:
-		print(granny.stats)
 		var gran = granny_scene.instantiate()
 		gran.granny_stats = granny.stats
 		gran.spritesheet = load(granny.spritesheet)

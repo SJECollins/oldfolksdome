@@ -8,6 +8,7 @@ signal end_skirmish(granny: CharacterBody2D)
 @export var fighter_1: CharacterBody2D
 @export var fighter_2: CharacterBody2D
 
+@onready var music := $BGMusicPlayer
 @onready var timer := $Timer
 @onready var timer_label := $TimerLabel
 @onready var judges := $Judges
@@ -22,6 +23,7 @@ var round_winner := []
 var winner
 
 func _ready():
+	music.stop()
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	start_panel.visible = false
 	end_panel.visible = false
@@ -30,6 +32,7 @@ func _ready():
 	timer.timeout.connect(_on_Timer_timeout)
 
 func start_skirmish(f1: CharacterBody2D, f2: CharacterBody2D):
+	music.play()
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	fighter_1 = f1
 	fighter_2 = f2
@@ -143,4 +146,5 @@ func _on_btn_fight_pressed() -> void:
 func _on_btn_end_fight_pressed() -> void:
 	end_panel.visible = false
 	visible = false
+	music.stop()
 	_end_skirmish()

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctvvanxpemv8g"]
+[gd_scene load_steps=2 format=3 uid="uid://l78at3dykrxv"]
 
-[ext_resource type="Script" uid="uid://dby805y4yihi4" path="res://scenes/outro_bad.gd" id="1_1xqmi"]
+[ext_resource type="Script" uid="uid://bon5aaf48jv6g" path="res://scenes/outro_final.gd" id="1_2ykdd"]
 
 [node name="Outro" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_1xqmi")
+script = ExtResource("1_2ykdd")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 layout_mode = 1
@@ -40,7 +40,7 @@ alignment = 1
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Oh no..."
+text = "The fight is over..."
 
 [node name="LblLineTwo" type="Label" parent="OutroContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -62,7 +62,7 @@ autowrap_mode = 3
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "None of your granny's will get the chance to save themselves in the:"
+text = "None of you're granny's will get the chance to save themselves in the:"
 
 [node name="LblFive" type="Label" parent="OutroContainer"]
 modulate = Color(1, 1, 1, 0)
@@ -75,7 +75,7 @@ horizontal_alignment = 1
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 8
-text = "The end..."
+text = "The end."
 flat = true
 
 [connection signal="pressed" from="OutroContainer/BtnEnd" to="." method="_on_btn_end_pressed"]

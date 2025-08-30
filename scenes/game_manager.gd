@@ -4,7 +4,7 @@ extends Node
 @onready var character_manager = $"../CharacterManager"
 @onready var hud = $"../HUD"
 @onready var arena = $"../SkirmishArena"
-
+@onready var music = $"../BGMusicPlayer"
 
 func _ready() -> void:
 	if Global.game_type == "saved":
@@ -19,6 +19,7 @@ func _ready() -> void:
 	hud.change_time_speed.connect(_change_speed)
 	hud.buy_item.connect(_buy_item)
 	hud.hire_staff.connect(_hire_staff)
+	hud.final_granny_selected.connect(_start_final_fight)
 	arena.end_skirmish.connect(_end_skirmish)
 	arena.visible = false
 	await get_tree().create_timer(2.0).timeout
@@ -29,6 +30,7 @@ func _ready() -> void:
 func _day_events() -> void:
 	for granny in Global.recruited_grannies:
 		granny.update_training()
+		granny.recover("post fight")
 
 
 func _week_events(weeks_remaining: int) -> void:
@@ -38,7 +40,7 @@ func _week_events(weeks_remaining: int) -> void:
 		var new_grannies = randi() % 5
 		character_manager.create_new_granny_group(new_grannies)
 	_deduct_expenses()
-	if weeks_remaining > 2:
+	if weeks_remaining == 0:
 		_end_fight()
 	else:
 		if weeks_remaining % 2 == 0:
@@ -95,6 +97,7 @@ func _reset_granny_after_skirmish(granny) -> void:
 
 
 func _start_a_skirmish(f1: CharacterBody2D) -> void:
+	music.stop()
 	arena.visible = true
 	var f2 = Global.all_grannies[0]
 	arena.start_skirmish(f1, f2)
@@ -105,11 +108,20 @@ func _skip_skirmish() -> void:
 
 
 func _end_skirmish(granny) -> void:
+	music.play()
 	_reset_granny_after_skirmish(granny)
 
 
 func _final_fight() -> void:
-	pass
+	time_manager.pause_time()
+	hud.display_final_select()
+
+
+func _start_final_fight(gran) -> void:
+	Global.final_granny = gran
+	var final_arena = load("res://scenes/final_arena.tscn")
+	get_tree().change_scene_to_file(final_arena)
+
 
 func _buy_item(item: String) -> void:
 	if item == "spoon" and Global.gold >= 20:
@@ -122,7 +134,29 @@ func _buy_item(item: String) -> void:
 		Global.weapons.append("walker")
 		Global.gold -= 100
 
+
 func _hire_staff(staff_member) -> void:
 	Global.staff.append(staff_member)
+	staff_member.hired = true
 	staff_member.set_new_position()
 	Global.gold -= staff_member.cost
+
+
+func export_staff_data() -> Array:
+	var staff_data = []
+	for staff in Global.staff:
+		var staff_dict = {
+			"type": staff.staff_type,
+			"hired": staff.hired
+		}
+		staff_data.append(staff_dict)
+	return staff_data
+
+func load_staff_data(staff_array: Array) -> void:
+	var staff_scene = load("res://assets/characters/staff.tscn")
+	for staff in staff_array:
+		var staff_instance = staff_scene
+		staff_instance.staff_type = staff.staff_type
+		staff_instance.hired = staff.hired
+		Global.staff.append(staff_instance)
+		staff_instance.set_position()
