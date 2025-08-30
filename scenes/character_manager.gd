@@ -149,6 +149,8 @@ func export_granny_data() -> Array:
 			"stats": granny.granny_stats,
 			"spritesheet": granny.spritesheet.get_path()
 		}
+		if granny.weapon:
+			granny.clear_old_weapon(granny.weapon)
 		granny_data.append(granny_dict)
 	for granny in Global.all_grannies:
 		var granny_dict = {
@@ -162,10 +164,16 @@ func export_granny_data() -> Array:
 			"spritesheet": granny.spritesheet.get_path()
 		}
 		granny_data.append(granny_dict)
+	print(granny_data)
 	return granny_data
 
 
 func load_granny_data(granny_array: Array) -> void:
+	Global.recruited_grannies = []
+	Global.retired_grannies = []
+	Global.all_grannies = []
+	print("Recruited: ", Global.recruited_grannies)
+	print("All: ", Global.all_grannies)
 	for granny in granny_array:
 		var gran = granny_scene.instantiate()
 		gran.granny_stats = granny.stats

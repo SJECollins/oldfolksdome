@@ -24,6 +24,7 @@ func save_game(slot: int):
 	save_data.num_grannies = Global.recruited_grannies.size()
 	save_data.granny_data = character_manager.export_granny_data()
 	save_data.staff_data = game_manager.export_staff_data()
+	save_data.weapons = Global.weapons.duplicate(true)
 	
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 	var err = ResourceSaver.save(save_data, get_save_path(slot))
@@ -46,6 +47,7 @@ func load_game(slot: int):
 		time_manager.weeks_remaining = loaded_data.weeks_remaining
 		character_manager.load_granny_data(loaded_data.granny_data)
 		game_manager.load_staff_data(loaded_data.staff_data)
+		Global.weapons = loaded_data.weapons.duplicate(true)
 
 func get_save_slots() -> Array:
 	var slots := []

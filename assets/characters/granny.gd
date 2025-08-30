@@ -514,7 +514,7 @@ func _remove_weapon() -> void:
 			current_weapon.queue_free()
 
 
-func _clear_old_weapon(weap_name) -> void:
+func clear_old_weapon(weap_name) -> void:
 	match weap_name:
 		"spoon":
 			granny_stats.strength -= 10
@@ -528,7 +528,7 @@ func _clear_old_weapon(weap_name) -> void:
 
 func _on_btn_none_pressed() -> void:
 	if weapon:
-		_clear_old_weapon(weapon)
+		clear_old_weapon(weapon)
 	weapon = ""
 	weapon_list.visible = false
 	weapon_label.text = "No weapon"
@@ -536,7 +536,7 @@ func _on_btn_none_pressed() -> void:
 
 func _on_btn_spoon_pressed() -> void:
 	if weapon:
-		_clear_old_weapon(weapon)
+		clear_old_weapon(weapon)
 	Global.weapons.erase("spoon")
 	var spoon = load("res://assets/weapons/spoon_sprite.tscn")
 	add_weapon("spoon", spoon)
@@ -545,7 +545,7 @@ func _on_btn_spoon_pressed() -> void:
 
 func _on_btn_cane_pressed() -> void:
 	if weapon:
-		_clear_old_weapon(weapon)
+		clear_old_weapon(weapon)
 	Global.weapons.erase("cane")
 	var cane = load("res://assets/weapons/cane_sprite.tscn")
 	add_weapon("cane", cane)
@@ -554,7 +554,7 @@ func _on_btn_cane_pressed() -> void:
 
 func _on_btn_walker_pressed() -> void:
 	if weapon:
-		_clear_old_weapon(weapon)
+		clear_old_weapon(weapon)
 	Global.weapons.erase("walker")
 	var walker = load("res://assets/weapons/walker_sprite.tscn")
 	add_weapon("walker", walker)

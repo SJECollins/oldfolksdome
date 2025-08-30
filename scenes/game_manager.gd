@@ -75,6 +75,7 @@ func _update_hud_time() -> void:
 
 
 func _update_hud_granny() -> void:
+	print(Global.recruited_grannies)
 	hud.update_granny_display(str(Global.recruited_grannies.size()))
 
 
@@ -162,6 +163,7 @@ func export_staff_data() -> Array:
 	return staff_data
 
 func load_staff_data(staff_array: Array) -> void:
+	Global.staff = []
 	var staff_scene = load("res://assets/characters/staff.tscn")
 	for staff in staff_array:
 		var staff_instance = staff_scene
