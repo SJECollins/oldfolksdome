@@ -87,7 +87,7 @@ func _on_btn_quit_confirm_pressed() -> void:
 
 func _on_btn_start_new_pressed() -> void:
 	Global.game_type = "new"
-	Global.gold = 1000
+	Global.gold = 200
 	get_tree().change_scene_to_file("res://scenes/intro.tscn")
 
 

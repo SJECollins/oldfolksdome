@@ -73,6 +73,7 @@ func start_round():
 	fighter_1.opponent = fighter_2
 	fighter_2.opponent = fighter_1
 	time_left_real = round_time_real
+	round_time_game = 60
 	round_active = true
 	timer.wait_time = round_time_real / round_time_game
 	timer.start()
@@ -87,11 +88,12 @@ func _on_Timer_timeout():
 	round_time_game -= 1
 	
 	if fighter_1.is_out or fighter_2.is_out:
+		timer.stop()
 		print("Knockout")
 		knockout = true
 		await get_tree().create_timer(4.0).timeout
 		_end_fight()
-		timer.stop()
+		round_active = false
 		
 	if round_time_game <= 0:
 		round_time_game = 0
@@ -128,11 +130,17 @@ func _continue_fight() -> void:
 	start_panel.visible = true
 	start_panel.get_node("Column/LblRoundWinner").visible = true
 	start_panel.get_node("Column/LblRoundWinner").text = "Winner Round " + str(round_num - 1) + " " + round_winner[round_num - 2]
+	if round_num != 3:
+		start_panel.get_node("Column/LblRound").text = "Round " + str(round_num) + " of 3"
+	else:
+		start_panel.get_node("Column/LblRound").text = "Final round!"
 
 func _end_fight() -> void:
 	print("Fight over")
+	print("Rounds: ", round_winner)
 	var num = round_winner.count(fighter_1.granny_stats.name)
-	var prize
+	print("Num: ", num)
+	var prize = 0
 	if knockout:
 		if fighter_1.is_out:
 			winner = fighter_2.granny_stats.name
@@ -144,7 +152,7 @@ func _end_fight() -> void:
 			fighter_2.granny_stats.losses += 1
 			prize = 400 # adjust this
 	else:
-		if num == 2:
+		if num >= 2:
 			winner = fighter_1.granny_stats.name
 			fighter_1.granny_stats.wins += 1
 			fighter_2.granny_stats.losses += 1

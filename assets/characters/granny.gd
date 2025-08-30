@@ -154,6 +154,7 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle resting timer
 	if is_resting:
+		_recover_stamina(delta)
 		rest_timer -= delta
 		if rest_timer <= 0:
 			is_resting = false
@@ -181,7 +182,6 @@ func _physics_process(delta: float) -> void:
 	
 	_update_facing_dir()
 	_update_attack_ray()
-	_recover_stamina(delta)
 	_decide_behavior(delta)
 	move_and_slide()
 
@@ -207,10 +207,13 @@ func _recover_stamina(delta: float) -> void:
 		recovery_rate *= 3.0  # Triple recovery when actively resting
 	
 	granny_stats.stamina = clamp(granny_stats.stamina + recovery_rate * delta, 0, MAX_STAMINA)
-	print("Stamina: %d", granny_stats.stamina)
+	print("Stamina: ", granny_stats.stamina)
 	_update_stamina()
 
 func _decide_behavior(delta: float) -> void:
+	if is_resting:
+		return
+	
 	if opponent.is_out and !is_out:
 		opponent = null
 		return

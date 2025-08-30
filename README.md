@@ -1,13 +1,17 @@
 # Old Folk's Dome
 
+*Two grannies enter, one granny leaves!* <sub>But in a non-copyright-infringement-just-for-fun-learning-Godot-kind-of-way</sub>
+
 2D Granny fighting game. Recruit grannies to fight. Help them afford retirement.
+
+_In slow progress_
 
 ## Credits and stuff
 
 ## Artwork
 <sub>Term used very loosely</sub>
 
-Me, with [Aseprite](https://www.aseprite.org/)
+Using [Aseprite](https://www.aseprite.org/)
 
 <sub>It pops up in Humble Bundles sometimes</sub>
 

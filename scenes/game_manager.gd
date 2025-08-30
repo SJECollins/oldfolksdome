@@ -25,6 +25,7 @@ func _ready() -> void:
 	await get_tree().create_timer(2.0).timeout
 	_update_hud_time()
 	_update_hud_granny()
+	_update_hud_gold()
 
 
 func _day_events() -> void:
@@ -94,12 +95,15 @@ func _reset_granny_after_skirmish(granny) -> void:
 	character_manager.replace_granny(granny)
 	granny.facing_dir = Vector2.LEFT
 	time_manager.unpause_time()
+	_update_hud_gold()
 
 
 func _start_a_skirmish(f1: CharacterBody2D) -> void:
 	music.stop()
 	arena.visible = true
 	var f2 = Global.all_grannies[0]
+	if f2.get_parent():
+		f2.get_parent().remove_child(f2)
 	arena.start_skirmish(f1, f2)
 
 
@@ -119,6 +123,8 @@ func _final_fight() -> void:
 
 func _start_final_fight(gran) -> void:
 	Global.final_granny = gran
+	if gran.get_parent():
+		gran.get_parent().remove_child(gran)
 	var final_arena = load("res://scenes/final_arena.tscn")
 	get_tree().change_scene_to_file(final_arena)
 
